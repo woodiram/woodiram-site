@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woodiram — Mobilier bois massif sur mesure</title>
+    <meta name="description" content="Pièces uniques en bois massif, créées par des artisans thaïlandais. Tables, consoles et buffets sur mesure, livrés en France et en Europe.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           VARIABLES — MODIFIER LES COULEURS ICI
+           Source: Color_usage.pdf Woodiram
+           ============================================================ */
+        :root {
+            --gold-1: #d4a25e;
+            --gold-2: #bf9850;
+            --gold-3: #aa8c5d;
+            --gold-4: #9a7942;
+            --gold-5: #5e3f1e;
+            --cream: #fcfdf8;
+            --brown-1: #462204;
+            --brown-2: #6d5237;
+            --brown-3: #7d7266;
+            --brown-4: #b0aba1;
+            --brown-5: #d2cfc7;
+
+            --primary: #5C4A3A;
+            --secondary: #8B7355;
+            --accent: #d4a25e;
+            --bg-primary: #FAF8F5;
+            --bg-secondary: #F0EDE6;
+            --bg-dark: #1a1410;
+            --text-primary: #3D3229;
+            --text-secondary: #8B7B6B;
+            --text-light: #FAF8F5;
+            --border: #D4CCC0;
+            --success: #6d7d5e;
+            --error: #9e4a4a;
+
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+            --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --dur-short: 250ms;
+            --dur-medium: 500ms;
+            --placeholder: linear-gradient(135deg, #D4CCC0 0%, #C4B5A5 50%, #B8A898 100%);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body.no-scroll { overflow: hidden; }
+        a { color: inherit; text-decoration: none; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; }
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.2; }
+        img { max-width: 100%; height: auto; display: block; }
+        ul { list-style: none; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 4rem); }
+        .section { padding: clamp(4rem, 8vw, 7rem) 0; }
+        .section--alt { background-color: var(--bg-secondary); }
+        .section--dark { background-color: var(--bg-dark); color: var(--text-light); }
+        .section--dark h2, .section--dark h3, .section--dark p { color: var(--text-light); }
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity var(--dur-medium) var(--ease-smooth), transform var(--dur-medium) var(--ease-smooth); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 100ms; }
+        .reveal-delay-2 { transition-delay: 200ms; }
+        .reveal-delay-3 { transition-delay: 300ms; }
+        .reveal-delay-4 { transition-delay: 400ms; }
+        .reveal-delay-5 { transition-delay: 500ms; }
+
+        /* HEADER */
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.25rem 0; transition: all var(--dur-short); }
+        .header.scrolled { background-color: rgba(250,248,245,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--border); padding: 0.75rem 0; }
+        .header__inner { display: flex; align-items: center; justify-content: space-between; }
+        .header__logo { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; z-index: 1001; }
+        .header__logo-icon { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--brown-5) 0%, var(--brown-4) 100%); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--primary); transition: transform var(--dur-short); }
+        .header__logo:hover .header__logo-icon { transform: scale(1.05); }
+        .header__logo-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--primary); letter-spacing: 0.08em; }
+        .header__nav { display: none; gap: 2.25rem; align-items: center; }
+        @media (min-width: 900px) { .header__nav { display: flex; } }
+        .header__nav a { font-size: 0.9375rem; font-weight: 500; color: var(--text-primary); position: relative; padding: 0.25rem 0; cursor: pointer; transition: color var(--dur-short); }
+        .header__nav a.active { color: var(--primary); }
+        .header__nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background-color: var(--accent); transition: width var(--dur-short) var(--ease-out); }
+        .header__nav a:hover::after, .header__nav a.active::after { width: 100%; }
+        .header__cta { display: none; padding: 0.75rem 1.5rem; background-color: var(--primary); color: var(--text-light); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em; border-radius: 4px; cursor: pointer; transition: all var(--dur-short); }
+        .header__cta:hover { background-color: #4A3429; transform: translateY(-1px); }
+        @media (min-width: 900px) { .header__cta { display: inline-flex; } }
+        .header__menu-btn { display: flex; flex-direction: column; gap: 5px; padding: 0.5rem; z-index: 1001; }
+        @media (min-width: 900px) { .header__menu-btn { display: none; } }
+        .header__menu-btn span { width: 24px; height: 2px; background-color: var(--primary); transition: all var(--dur-short); }
+        .header__menu-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .header__menu-btn.open span:nth-child(2) { opacity: 0; }
+        .header__menu-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .mobile-menu { position: fixed; inset: 0; background-color: var(--bg-primary); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; opacity: 0; pointer-events: none; transition: opacity var(--dur-short); }
+        .mobile-menu.open { opacity: 1; pointer-events: auto; }
+        .mobile-menu a { font-family: var(--font-display); font-size: 1.75rem; color: var(--text-primary); cursor: pointer; transition: color var(--dur-short); }
+        .mobile-menu a:hover, .mobile-menu a.active { color: var(--accent); }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 1.75rem; font-weight: 500; font-size: 0.9375rem; border-radius: 4px; cursor: pointer; transition: all var(--dur-short); white-space: nowrap; }
+        .btn svg { width: 18px; height: 18px; transition: transform var(--dur-short); }
+        .btn:hover svg { transform: translateX(4px); }
+        .btn--primary { background-color: var(--primary); color: var(--text-light); }
+        .btn--primary:hover { background-color: #4A3429; transform: translateY(-2px); }
+        .btn--secondary { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+        .btn--secondary:hover { background-color: var(--primary); color: var(--text-light); }
+        .btn--light { background-color: var(--text-light); color: var(--primary); }
+        .btn--light:hover { background-color: #fff; transform: translateY(-2px); }
+        .btn--outline { background: transparent; color: var(--text-light); border: 1.5px solid rgba(250,248,245,0.5); }
+        .btn--outline:hover { background-color: var(--text-light); color: var(--primary); border-color: var(--text-light); }
+        .btn--ghost { color: var(--primary); padding: 0.5rem 0; position: relative; }
+        .btn--ghost::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background-color: var(--accent); transition: width var(--dur-short); }
+        .btn--ghost:hover::after { width: 100%; }
+        @media (max-width: 599px) { .hero__cta { flex-direction: column; padding: 0 1rem; } .hero__cta .btn { width: 100%; justify-content: center; } }
+
+        /* HERO */
+        .hero { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .hero__bg { position: absolute; inset: 0; background: var(--placeholder); }
+        .hero__bg-label { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.875rem; }
+        .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(250,248,245,0.1) 0%, rgba(250,248,245,0.35) 50%, rgba(250,248,245,0.65) 100%); }
+        .hero__content { position: relative; z-index: 10; text-align: center; max-width: 900px; padding: 0 1.5rem; }
+        .hero__title { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 1.5rem; line-height: 1.1; }
+        .hero__subtitle { font-size: clamp(1.0625rem, 2vw, 1.25rem); color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero__cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+        .hero__scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; animation: bounce 2s infinite; }
+        .hero__scroll svg { width: 24px; height: 24px; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-8px); } 60% { transform: translateX(-50%) translateY(-4px); } }
+
+        /* INTRO */
+        .intro { text-align: center; }
+        .intro__text { max-width: 800px; margin: 0 auto 3rem; }
+        .intro__text p { font-size: 1.0625rem; line-height: 1.9; }
+        .intro__features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.5rem; max-width: 900px; margin: 0 auto; }
+        .feature { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .feature__icon { width: 56px; height: 56px; margin-bottom: 1rem; }
+        .feature__icon svg { width: 100%; height: 100%; stroke: var(--primary); stroke-width: 1.5; fill: none; }
+        .feature__title { font-family: var(--font-display); font-size: 1.125rem; margin-bottom: 0.5rem; }
+        .feature__desc { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* REALISATIONS PREVIEW */
+        .realisations__header { text-align: center; margin-bottom: 3rem; }
+        .realisations__header p { max-width: 600px; margin: 1rem auto 0; color: var(--text-secondary); font-style: italic; }
+        .realisations__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        @media (min-width: 600px) { .realisations__grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; } }
+        .realisation-card { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 4px; cursor: pointer; background: var(--placeholder); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.75rem; transition: transform var(--dur-short); }
+        .realisation-card:hover { transform: scale(1.02); }
+        .realisation-card__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,0.7) 0%, transparent 50%); opacity: 0; transition: opacity var(--dur-short); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem; }
+        .realisation-card:hover .realisation-card__overlay { opacity: 1; }
+        .realisation-card__info { transform: translateY(10px); transition: transform var(--dur-short); }
+        .realisation-card:hover .realisation-card__info { transform: translateY(0); }
+        .realisation-card__name { font-family: var(--font-display); font-size: 1.125rem; color: var(--text-light); margin-bottom: 0.25rem; }
+        .realisation-card__essence { font-size: 0.8125rem; color: rgba(250,248,245,0.8); }
+        .realisations__cta { text-align: center; margin-top: 3rem; }
+
+        /* SAVOIR-FAIRE PREVIEW */
+        .savoir-faire { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+        @media (min-width: 900px) { .savoir-faire { grid-template-columns: 1fr 1fr; gap: 5rem; } }
+        .savoir-faire__content { order: 2; }
+        @media (min-width: 900px) { .savoir-faire__content { order: 1; } }
+        .savoir-faire__title { font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 1.5rem; }
+        .savoir-faire__text { margin-bottom: 2rem; }
+        .savoir-faire__text p { margin-bottom: 1rem; }
+        .savoir-faire__image { order: 1; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; background: var(--placeholder); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.875rem; }
+        @media (min-width: 900px) { .savoir-faire__image { order: 2; } }
+
+        /* PROCESS STEPS HOME */
+        .process__header { text-align: center; margin-bottom: 3.5rem; }
+        .process__steps { display: flex; flex-direction: column; gap: 3rem; position: relative; padding-left: 40px; }
+        .step { display: flex; align-items: flex-start; gap: 1.5rem; text-align: left; position: relative; }
+        .step__icon { flex-shrink: 0; position: relative; z-index: 2; }
+        .step__icon img { width: 224px; height: 224px; object-fit: contain; }
+        .step__text { padding-top: 0.5rem; }
+        .step__title { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 0.5rem; }
+        .step__desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+        .process__cta { text-align: center; margin-top: 3rem; }
+        /* Ligne verticale mobile */
+        .process__steps::before {
+            content: ''; position: absolute; left: 151px; top: 0; bottom: 0;
+            width: 1px; background-color: var(--border);
+        }
+        /* Desktop : horizontal */
+        @media (min-width: 1000px) {
+            .process__steps { flex-direction: row; gap: 0; padding-left: 0; justify-content: space-between; align-items: flex-start; }
+            .process__steps::before { left: 0; right: 0; top: 112px; bottom: auto; width: auto; height: 1px; }
+            .step { flex-direction: column; align-items: center; text-align: center; flex: 1; gap: 1rem; }
+        }
+
+        /* CTA FINAL */
+        .cta-final { text-align: center; }
+        .cta-final__content { max-width: 700px; margin: 0 auto; }
+        .cta-final__title { color: var(--text-light); margin-bottom: 1.5rem; font-size: clamp(2rem, 4vw, 2.5rem); }
+        .cta-final__text { color: rgba(250,248,245,0.8); margin-bottom: 2.5rem; font-size: 1.0625rem; }
+        .cta-final__buttons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+        /* PAGE HERO */
+        .page-hero { padding: 10rem 0 4.5rem; text-align: center; background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--bg-primary) 100%); }
+        .page-hero h1 { font-size: clamp(2.25rem, 5vw, 3.25rem); margin-bottom: 1.5rem; }
+        .page-hero p { font-size: 1.0625rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; line-height: 1.9; }
+
+        /* GALLERY */
+        .gallery__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (min-width: 600px) { .gallery__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+        @media (min-width: 900px) { .gallery__grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+        .gallery-item { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 4px; cursor: pointer; background: var(--placeholder); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.05em; transition: transform var(--dur-short); }
+        .gallery-item:hover { transform: scale(1.02); }
+        .gallery-item__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,0.7) 0%, transparent 50%); opacity: 0; transition: opacity var(--dur-short); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; }
+        .gallery-item:hover .gallery-item__overlay { opacity: 1; }
+        .gallery-item__info { transform: translateY(10px); transition: transform var(--dur-short); }
+        .gallery-item:hover .gallery-item__info { transform: translateY(0); }
+        .gallery-item__name { font-family: var(--font-display); font-size: 1.125rem; font-weight: 500; color: var(--text-light); text-transform: none; letter-spacing: 0; }
+        .gallery-item__essence { font-size: 0.8125rem; color: rgba(250,248,245,0.8); text-transform: none; letter-spacing: 0; }
+
+        /* CONTENT SECTIONS */
+        .content-section { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+        @media (min-width: 900px) { .content-section { grid-template-columns: 1fr 1fr; gap: 5rem; } }
+        .content-section--reverse .content-section__text { order: 1; }
+        @media (min-width: 900px) { .content-section--reverse .content-section__text { order: 2; } }
+        .content-section--reverse .content-section__image { order: 2; }
+        @media (min-width: 900px) { .content-section--reverse .content-section__image { order: 1; } }
+        .content-section__text h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 1.5rem; }
+        .content-section__text p { margin-bottom: 1rem; line-height: 1.8; }
+        .content-section__text p:last-of-type { margin-bottom: 0; }
+        .content-section__image { aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; background: var(--placeholder); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.875rem; }
+
+        /* QUOTE */
+        .quote-section { text-align: center; }
+        .quote { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-style: italic; color: var(--text-primary); max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+        /* PROCESS STEPS FULL */
+        .process-steps { display: flex; flex-direction: column; gap: 4rem; }
+        .process-step { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
+        @media (min-width: 900px) { .process-step { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+        .process-step--reverse .process-step__content { order: 1; }
+        @media (min-width: 900px) { .process-step--reverse .process-step__content { order: 2; } }
+        .process-step--reverse .process-step__visual { order: 2; }
+        @media (min-width: 900px) { .process-step--reverse .process-step__visual { order: 1; } }
+        .process-step__number { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background-color: var(--bg-secondary); font-family: var(--font-display); font-size: 1.5rem; color: var(--primary); margin-bottom: 1rem; }
+        .section--alt .process-step__number { background-color: var(--bg-primary); }
+        .process-step__title { font-size: clamp(1.5rem, 2.5vw, 1.75rem); margin-bottom: 1rem; }
+        .process-step__text p { margin-bottom: 1rem; line-height: 1.8; }
+        .process-step__text p:last-child { margin-bottom: 0; }
+        .process-step__visual { aspect-ratio: 4/3; background: var(--placeholder); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.875rem; }
+
+        /* PRICING */
+        .pricing-philosophy { max-width: 800px; margin: 0 auto; }
+        .pricing-philosophy h2 { text-align: center; font-size: clamp(1.75rem, 3.5vw, 2.25rem); margin-bottom: 2rem; }
+        .pricing-philosophy p { font-size: 1.0625rem; margin-bottom: 1rem; line-height: 1.8; }
+        .pricing-highlight { background-color: var(--bg-primary); padding: 1.5rem 2rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--accent); }
+        .pricing-highlight p { margin-bottom: 0; font-size: 1rem; }
+        .pricing-highlight strong { color: var(--primary); }
+
+        /* A PROPOS */
+        .story { max-width: 800px; margin: 0 auto; }
+        .story h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 1.5rem; text-align: center; }
+        .story p { font-size: 1.0625rem; margin-bottom: 1.25rem; line-height: 1.9; }
+        .name-origin { max-width: 700px; margin: 0 auto; text-align: center; }
+        .name-origin__icon { width: 80px; height: 80px; margin: 0 auto 1.5rem; border-radius: 50%; background-color: var(--bg-primary); display: flex; align-items: center; justify-content: center; }
+        .name-origin__icon svg { width: 40px; height: 40px; stroke: var(--primary); stroke-width: 1.5; fill: none; }
+        .name-origin h2 { font-size: clamp(1.5rem, 2.5vw, 1.75rem); margin-bottom: 1rem; }
+        .name-origin p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.8; }
+        .name-origin__highlight { font-family: var(--font-display); font-size: 1.25rem; color: var(--accent); font-style: italic; margin-top: 1rem; display: block; }
+        .values-header { text-align: center; margin-bottom: 3rem; }
+        .values-header h2 { font-size: clamp(1.75rem, 3.5vw, 2.25rem); margin-bottom: 0.75rem; }
+        .values-header p { color: var(--text-secondary); }
+        .values-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 768px) { .values-grid { grid-template-columns: repeat(3, 1fr); } }
+        .value-card { text-align: center; padding: 2rem 1.5rem; }
+        .value-card__icon { width: 64px; height: 64px; margin: 0 auto 1.25rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; background-color: var(--bg-secondary); }
+        .value-card__icon svg { width: 32px; height: 32px; stroke: var(--primary); stroke-width: 1.5; fill: none; }
+        .value-card__title { font-family: var(--font-display); font-size: 1.375rem; margin-bottom: 0.75rem; }
+        .value-card__text { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* FORM */
+        .profile-selector { display: flex; gap: 0; margin-bottom: 2.5rem; max-width: 400px; }
+        .profile-selector__btn { flex: 1; padding: 0.875rem 1.5rem; font-size: 0.9375rem; font-weight: 500; background: var(--bg-secondary); color: var(--text-secondary); border: 1.5px solid var(--border); cursor: pointer; transition: all var(--dur-short); }
+        .profile-selector__btn:first-child { border-radius: 4px 0 0 4px; }
+        .profile-selector__btn:last-child { border-radius: 0 4px 4px 0; border-left: none; }
+        .profile-selector__btn.active { background: var(--primary); color: var(--text-light); border-color: var(--primary); }
+        .form-panel { display: none; }
+        .form-panel.active { display: block; }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+        @media (min-width: 900px) { .contact-grid { grid-template-columns: 1.2fr 0.8fr; gap: 4rem; } }
+        .form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 600px) { .form-row { grid-template-columns: 1fr 1fr; } }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { font-size: 0.875rem; font-weight: 500; }
+        .form-group label .required { color: var(--error); }
+        .form-group input, .form-group select, .form-group textarea { padding: 0.875rem 1rem; border: 1.5px solid var(--border); border-radius: 4px; font-family: var(--font-body); font-size: 1rem; color: var(--text-primary); background-color: var(--bg-primary); transition: all var(--dur-short); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(92,74,58,0.1); }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .upload-zone { border: 2px dashed var(--border); border-radius: 8px; padding: 2rem; text-align: center; cursor: pointer; transition: all var(--dur-short); }
+        .upload-zone:hover { border-color: var(--primary); background-color: rgba(92,74,58,0.02); }
+        .upload-zone__icon { width: 48px; height: 48px; margin: 0 auto 1rem; }
+        .upload-zone__icon svg { width: 100%; height: 100%; stroke: var(--text-secondary); stroke-width: 1.5; fill: none; }
+        .upload-zone__text { font-size: 0.9375rem; color: var(--text-secondary); }
+        .upload-zone__text strong { color: var(--primary); }
+        .upload-zone__hint { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 0.5rem; }
+        .form-submit { padding: 1rem 2rem; background-color: var(--primary); color: var(--text-light); font-weight: 500; font-size: 1rem; border-radius: 4px; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all var(--dur-short); }
+        .form-submit:hover { background-color: #4A3429; transform: translateY(-2px); }
+        .form-submit svg { width: 18px; height: 18px; }
+        .contact-aside { display: flex; flex-direction: column; gap: 2rem; }
+        .contact-alt { background-color: var(--bg-secondary); padding: 2rem; border-radius: 8px; }
+        .contact-alt__icon { width: 48px; height: 48px; margin-bottom: 1rem; }
+        .contact-alt__icon svg { width: 100%; height: 100%; stroke: var(--primary); stroke-width: 1.5; fill: none; }
+        .contact-alt h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .contact-alt p { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.6; }
+        .contact-next { padding: 2rem; border: 1px solid var(--border); border-radius: 8px; }
+        .contact-next h3 { font-size: 1.125rem; margin-bottom: 1rem; }
+        .contact-next__steps { counter-reset: steps; }
+        .contact-next__steps li { counter-increment: steps; display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; font-size: 0.9375rem; color: var(--text-secondary); }
+        .contact-next__steps li::before { content: counter(steps); flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background-color: var(--bg-secondary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: var(--primary); }
+
+        /* MODAL */
+        .modal-backdrop { position: fixed; inset: 0; background-color: rgba(26,20,16,0); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1.5rem; pointer-events: none; transition: background-color 0.3s var(--ease-out); }
+        .modal-backdrop.active { pointer-events: auto; background-color: rgba(26,20,16,0.9); }
+        .modal { background-color: var(--bg-primary); border-radius: 8px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; opacity: 0; transform: scale(0.95); transition: all 0.4s var(--ease-smooth); }
+        .modal-backdrop.active .modal { opacity: 1; transform: scale(1); }
+        .modal__header { display: flex; justify-content: flex-end; padding: 1rem 1rem 0; }
+        .modal__close { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background-color var(--dur-short); }
+        .modal__close:hover { background-color: var(--bg-secondary); }
+        .modal__close svg { width: 24px; height: 24px; stroke: var(--text-primary); stroke-width: 2; }
+        .modal__carousel { position: relative; aspect-ratio: 16/10; background: var(--placeholder); margin: 0 1.25rem; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.875rem; }
+        .modal__content { padding: 1.25rem; }
+        .modal__title { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 0.5rem; }
+        .modal__story { color: var(--text-secondary); font-style: italic; margin-bottom: 1.5rem; font-size: 0.9375rem; }
+        .modal__specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; padding: 1rem; background-color: var(--bg-secondary); border-radius: 4px; margin-bottom: 1.5rem; }
+        @media (min-width: 600px) { .modal__specs { grid-template-columns: repeat(6, 1fr); } }
+        .modal__spec { text-align: center; }
+        .modal__spec-icon { width: 28px; height: 28px; margin: 0 auto 0.375rem; stroke: var(--primary); stroke-width: 1.5; fill: none; }
+        .modal__spec-value { font-weight: 600; font-size: 0.8125rem; margin-bottom: 0.125rem; }
+        .modal__spec-label { font-size: 0.6875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.03em; }
+        .modal__cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background-color: var(--primary); color: var(--text-light); font-weight: 500; font-size: 0.9375rem; border-radius: 4px; cursor: pointer; transition: all var(--dur-short); }
+        .modal__cta:hover { background-color: #4A3429; transform: translateY(-2px); }
+        .modal__cta svg { width: 16px; height: 16px; }
+
+        /* FOOTER */
+        .footer { background-color: var(--bg-dark); padding: 4rem 0 2rem; }
+        .footer__inner { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+        @media (min-width: 768px) { .footer__inner { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; } }
+        .footer__brand { max-width: 300px; }
+        .footer__logo { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+        .footer__logo-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(212,162,94,0.15); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); color: var(--gold-1); font-size: 0.875rem; font-weight: 600; }
+        .footer__logo-text { font-family: var(--font-display); font-size: 1.125rem; color: var(--gold-1); letter-spacing: 0.08em; }
+        .footer__tagline { font-size: 0.875rem; color: rgba(250,248,245,0.5); line-height: 1.6; }
+        .footer__col h4 { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-1); margin-bottom: 1rem; }
+        .footer__col li { margin-bottom: 0.5rem; }
+        .footer__col a { font-size: 0.875rem; color: rgba(250,248,245,0.5); cursor: pointer; transition: color var(--dur-short); }
+        .footer__col a:hover { color: var(--text-light); }
+        .footer__bottom { padding-top: 1.5rem; border-top: 1px solid rgba(212,162,94,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+        .footer__bottom p, .footer__bottom a { font-size: 0.75rem; color: rgba(250,248,245,0.4); }
+        .footer__bottom a:hover { color: var(--text-light); }
+        .footer__legal { display: flex; gap: 1.25rem; }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header" id="header"><div class="container"><div class="header__inner">
+        <div class="header__logo" data-page="home"><div class="header__logo-icon"><img src="assets/logos/Logo_Avatar_200x200.png" alt="Woodiram" style="width:100%;height:100%;object-fit:contain;border-radius:50%;"></div><span class="header__logo-text">WOODIRAM</span></div>
+        <nav class="header__nav"><a data-page="realisations">Réalisations</a><a data-page="savoir-faire">Savoir-faire</a><a data-page="notre-approche">Notre Approche</a><a data-page="a-propos">À Propos</a></nav>
+        <div class="header__cta" data-page="votre-projet">Votre Projet</div>
+        <button class="header__menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div></div></header>
+    <div class="mobile-menu" id="mobileMenu"><a data-page="home">Accueil</a><a data-page="realisations">Réalisations</a><a data-page="savoir-faire">Savoir-faire</a><a data-page="notre-approche">Notre Approche</a><a data-page="a-propos">À Propos</a><a data-page="votre-projet">Votre Projet</a></div>
+
+    <main>
+        <!-- ==================== PAGE: HOME ==================== -->
+        <div class="page active" id="page-home">
+            <section class="hero">
+                <div class="hero__bg">
+                    <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
+                        <source src="assets/videos/Accueil_Hero_Video_Wood.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="hero__overlay"></div>
+                <div class="hero__content">
+                    <h1 class="hero__title reveal">Des meubles uniques,<br>taillés dans la masse.</h1>
+                    <p class="hero__subtitle reveal reveal-delay-1">Tables et meubles en bois massif. Sur-mesure. Livrés en France.</p>
+                    <div class="hero__cta reveal reveal-delay-2">
+                        <div class="btn btn--primary" data-page="realisations">Découvrir nos réalisations <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                        <div class="btn btn--secondary" data-page="votre-projet">Démarrer un projet</div>
+                    </div>
+                </div>
+                <div class="hero__scroll"><span>Explorer</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+            </section>
+
+            <section class="section intro"><div class="container">
+                <div class="intro__text reveal">
+                    <p><strong>Woodiram</strong>, c'est l'art de faire entrer la forêt chez vous. Nous ne fabriquons pas de meubles en série. Nous créons des tables, consoles et buffets uniques — des pièces monolithiques taillées dans des sections entières de troncs, façonnées par des artisans thaïlandais, et livrées directement chez vous en France.</p>
+                    <p style="margin-top: 1rem; font-style: italic; color: var(--text-secondary);">Chaque pièce est une histoire. La vôtre reste à écrire.</p>
+                </div>
+                <div class="intro__features">
+                    <div class="feature reveal reveal-delay-1"><div class="feature__icon"><svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="24" stroke-dasharray="4 4"/><circle cx="28" cy="28" r="16"/><circle cx="28" cy="28" r="8"/><circle cx="28" cy="28" r="2" fill="currentColor"/></svg></div><h3 class="feature__title">Pièces uniques</h3><p class="feature__desc">Chaque création est une œuvre singulière, jamais reproduite.</p></div>
+                    <div class="feature reveal reveal-delay-2"><div class="feature__icon"><svg viewBox="0 0 56 56"><path d="M28 8v40M18 18c0 5.5 4.5 10 10 10s10-4.5 10-10"/><path d="M14 28h28M18 38c0-5.5 4.5-10 10-10s10 4.5 10 10"/></svg></div><h3 class="feature__title">Artisanat thaïlandais</h3><p class="feature__desc">Façonnées par des artisans experts, avec patience et respect du bois.</p></div>
+                    <div class="feature reveal reveal-delay-3"><div class="feature__icon"><svg viewBox="0 0 56 56"><rect x="12" y="20" width="32" height="20" rx="2"/><path d="M8 40h40M20 20v-8l8 4 8-4v8"/><circle cx="20" cy="30" r="3"/><circle cx="36" cy="30" r="3"/></svg></div><h3 class="feature__title">Livraison clé en main</h3><p class="feature__desc">Transport, douanes, TVA : tout est inclus.</p></div>
+                </div>
+            </div></section>
+
+            <section class="section section--alt"><div class="container">
+                <div class="realisations__header reveal"><h2>Ce qui a été créé</h2><p>Chaque pièce présentée ici a trouvé sa maison. La prochaine pourrait être la vôtre.</p></div>
+                <div class="realisations__grid">
+                    <div class="realisation-card reveal reveal-delay-1" data-page="realisations"><img src="assets/images/test_table a manger.png" alt="Table a manger en bois massif Suar" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">L'Horizon</h3><span class="realisation-card__essence">Suar</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-2" data-page="realisations"><img src="assets/images/test_buffet.png" alt="Buffet en bois massif Acacia" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">Racine d'Ombre</h3><span class="realisation-card__essence">Acacia</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-3" data-page="realisations"><img src="assets/images/test_table basse.png" alt="Table basse en bois massif Teak" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">Écorce Vivante</h3><span class="realisation-card__essence">Teak</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-4" data-page="realisations"><img src="assets/images/test_console.png" alt="Console en bois massif Padouk" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">La Traversée</h3><span class="realisation-card__essence">Padouk</span></div></div></div>
+                </div>
+                <div class="realisations__cta reveal"><div class="btn btn--ghost" data-page="realisations">Voir toutes les réalisations <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+            </div></section>
+
+            <section class="section"><div class="container"><div class="savoir-faire">
+                <div class="savoir-faire__content reveal">
+                    <h2 class="savoir-faire__title">Façonné à la main,<br>quelque part en Thaïlande</h2>
+                    <div class="savoir-faire__text"><p>Chaque pièce Woodiram naît dans un atelier thaïlandais, entre les mains d'artisans qui ont appris à lire le bois avant de le travailler.</p><p>Ils ne fabriquent pas en série. Ils prennent le temps.</p></div>
+                    <div class="btn btn--ghost" data-page="savoir-faire">Découvrir leur savoir-faire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                </div>
+                <div class="savoir-faire__image reveal">Photo artisan — assets/images/savoir-faire/artisan.png</div>
+            </div></div></section>
+
+            <section class="section section--alt"><div class="container">
+                <div class="process__header reveal"><h2>Comment naît votre pièce</h2></div>
+                <div class="process__steps">
+                    <div class="step reveal reveal-delay-1">
+                        <div class="step__icon"><img src="assets/icons/Icone_Accueil_Notre Approche_Etape1_256x256.png" alt="Échange"></div>
+                        <div class="step__text"><h3 class="step__title">L'échange</h3><p class="step__desc">Vous nous parlez de votre projet, vos envies, votre espace. Ensemble, nous définissons les contours de votre future pièce.</p></div>
+                    </div>
+                    <div class="step reveal reveal-delay-2">
+                        <div class="step__icon"><img src="assets/icons/Icone_Accueil_Notre Approche_Etape2_256x256.png" alt="Sourcing"></div>
+                        <div class="step__text"><h3 class="step__title">Le sourcing</h3><p class="step__desc">Nous activons notre réseau d'artisans en Thaïlande. La recherche de LA pièce qui correspond à vos critères commence.</p></div>
+                    </div>
+                    <div class="step reveal reveal-delay-3">
+                        <div class="step__icon"><img src="assets/icons/Icone_Accueil_Notre Approche_Etape3_256x256.png" alt="Révélation"></div>
+                        <div class="step__text"><h3 class="step__title">La révélation</h3><p class="step__desc">Photos et vidéos des pièces trouvées. Vous découvrez et validez votre future pièce sur bois réel.</p></div>
+                    </div>
+                    <div class="step reveal reveal-delay-4">
+                        <div class="step__icon"><img src="assets/icons/Icone_Accueil_Notre Approche_Etape4_256x256.png" alt="Sérénité"></div>
+                        <div class="step__text"><h3 class="step__title">La sérénité</h3><p class="step__desc">Prix final, sans surprise. Transport, douanes, taxes, assurance : nous gérons l'intégralité.</p></div>
+                    </div>
+                    <div class="step reveal reveal-delay-5">
+                        <div class="step__icon"><img src="assets/icons/Icone_Accueil_Notre Approche_Etape5_256x256.png" alt="Arrivée"></div>
+                        <div class="step__text"><h3 class="step__title">L'arrivée</h3><p class="step__desc">Votre pièce unique, façonnée pour vous, livrée directement à votre porte.</p></div>
+                    </div>
+                </div>
+                <div class="process__cta reveal"><div class="btn btn--ghost" data-page="notre-approche">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+            </div></section>
+
+            <section class="section section--dark cta-final"><div class="container"><div class="cta-final__content reveal">
+                <h2 class="cta-final__title">Vous avez un projet en tête ?</h2>
+                <p class="cta-final__text">Racontez-nous ce que vous imaginez. Nous vous répondons sous 48h.</p>
+                <div class="cta-final__buttons">
+                    <div class="btn btn--light" data-page="votre-projet">Parlons de votre projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                    <div class="btn btn--outline" data-page="realisations">Explorer les réalisations</div>
+                </div>
+            </div></div></section>
+        </div>
+
+        <!-- ==================== PAGE: RÉALISATIONS ==================== -->
+        <div class="page" id="page-realisations">
+            <section class="page-hero"><div class="container"><h1 class="reveal">Nos réalisations</h1><p class="reveal">Chaque pièce présentée ici a été imaginée pour un projet unique, taillée dans un bois d'exception, et livrée dans son nouveau foyer.</p></div></section>
+            <section class="section" style="padding-top:0"><div class="container"><div class="gallery__grid" id="galleryGrid"></div></div></section>
+            <section class="section section--dark cta-final"><div class="container"><div class="cta-final__content reveal"><h2 class="cta-final__title">Inspiré ?</h2><p class="cta-final__text">Ces pièces ont trouvé leur foyer. La prochaine attend peut-être le vôtre.</p><div class="btn btn--light" data-page="votre-projet">Parlons de votre projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div></section>
+        </div>
+
+        <!-- ==================== PAGE: SAVOIR-FAIRE ==================== -->
+        <div class="page" id="page-savoir-faire">
+            <section class="page-hero"><div class="container"><h1 class="reveal">Le savoir-faire</h1><p class="reveal">Quelque part en Thaïlande, loin des circuits industriels, des hommes travaillent le bois comme on l'a toujours fait.</p></div></section>
+            <section class="section"><div class="container"><div class="content-section"><div class="content-section__text reveal"><h2>Tout commence par le bois</h2><p>Les essences que nous utilisons — Suar, Acacia, Teak — sont des bois tropicaux denses et naturellement résistants. Chaque plateau est sélectionné pour son grain, ses veines, son caractère.</p><p>Avant d'être travaillé, le bois passe par un séchage contrôlé en four, garantissant stabilité en climat européen.</p></div><div class="content-section__image reveal">Plateaux bruts — assets/images/savoir-faire/bois.png</div></div></div></section>
+            <section class="section section--alt quote-section"><div class="container"><p class="quote reveal">Nos artisans ne cherchent pas à domestiquer le bois. Ils l'accompagnent.</p></div></section>
+            <section class="section"><div class="container"><div class="content-section content-section--reverse"><div class="content-section__text reveal"><h2>Façonné à la main</h2><p>Il n'y a pas de moule, pas de gabarit. Chaque pièce est unique. Aplanir un plateau de trois mètres sans effacer ses irrégularités. Poncer pendant des heures pour révéler la profondeur du grain.</p><p>Choisir de conserver une fissure, un nœud, une cicatrice — parce que c'est ce qui rend la pièce vivante.</p></div><div class="content-section__image reveal">Artisan — assets/images/savoir-faire/artisan.png</div></div></div></section>
+            <section class="section section--alt"><div class="container"><div class="content-section"><div class="content-section__text reveal"><h2>Protéger sans dénaturer</h2><p>Nous utilisons des huiles naturelles qui pénètrent le bois en profondeur, le nourrissent et le protègent — sans film artificiel en surface. Le bois continue de respirer.</p><p>Cette finition est saine, durable, et facile à entretenir.</p></div><div class="content-section__image reveal">Finition — assets/images/savoir-faire/finition.png</div></div></div></section>
+            <section class="section"><div class="container"><div class="content-section content-section--reverse"><div class="content-section__text reveal"><h2>Le piètement</h2><p>Bois massif assorti, métal (noir mat, bronze, acier brossé), ou verre trempé. Chaque option est pensée pour mettre en valeur le plateau tout en garantissant stabilité et durabilité.</p></div><div class="content-section__image reveal">Piètement — assets/images/savoir-faire/pietement.png</div></div></div></section>
+            <section class="section section--dark cta-final"><div class="container"><div class="cta-final__content reveal"><h2 class="cta-final__title">Envie de voir naître la vôtre ?</h2><p class="cta-final__text">Du bois brut à votre intérieur, en passant par les mains de nos artisans.</p><div class="cta-final__buttons"><div class="btn btn--light" data-page="votre-projet">Parlons de votre projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="btn btn--outline" data-page="realisations">Voir nos réalisations</div></div></div></div></section>
+        </div>
+
+        <!-- ==================== PAGE: NOTRE APPROCHE ==================== -->
+        <div class="page" id="page-notre-approche">
+            <section class="page-hero"><div class="container"><h1 class="reveal">Notre approche</h1><p class="reveal">De votre idée à votre intérieur, chaque projet suit un chemin clair. Pas de surprise, pas de zone d'ombre.</p></div></section>
+            <section class="section"><div class="container"><div class="process-steps">
+                <div class="process-step reveal"><div class="process-step__content"><div class="process-step__number">1</div><h2 class="process-step__title">Échange & définition</h2><div class="process-step__text"><p>Vous nous contactez via le formulaire ou par email. Nous organisons un appel visio de 30 min pour comprendre votre projet.</p><p>Cet échange est gratuit et sans engagement.</p></div></div><div class="process-step__visual">Visio — assets/images/approche/echange.png</div></div>
+                <div class="process-step process-step--reverse reveal"><div class="process-step__content"><div class="process-step__number">2</div><h2 class="process-step__title">Sourcing</h2><div class="process-step__text"><p>Nous recherchons la section de bois idéale auprès de nos artisans en Thaïlande. Vous recevez photos et vidéos des options.</p><p>Délai : 2 à 4 semaines.</p></div></div><div class="process-step__visual">Sourcing — assets/images/approche/sourcing.png</div></div>
+            </div></div></section>
+            <section class="section section--alt"><div class="container"><div class="process-steps">
+                <div class="process-step reveal"><div class="process-step__content"><div class="process-step__number">3</div><h2 class="process-step__title">Fabrication</h2><div class="process-step__text"><p>Une fois la section validée, l'artisan commence. Vous recevez des photos d'avancement régulières.</p><p>Délai : 3 à 6 semaines.</p></div></div><div class="process-step__visual">Fabrication — assets/images/approche/fabrication.png</div></div>
+                <div class="process-step process-step--reverse reveal"><div class="process-step__content"><div class="process-step__number">4</div><h2 class="process-step__title">Livraison DDP</h2><div class="process-step__text"><p>Emballage sécurisé, transport international, douanes, TVA — tout inclus. Vous n'avez rien à faire.</p><p>Délai : 4 à 6 semaines.</p></div></div><div class="process-step__visual">Livraison — assets/images/approche/livraison.png</div></div>
+            </div></div></section>
+            <section class="section"><div class="container"><div class="pricing-philosophy reveal"><h2>Transparence sur les prix</h2><p>Le prix que nous communiquons est le prix final. Il inclut tout : la pièce, la fabrication, l'emballage, le transport, les douanes, la TVA, et la livraison.</p><div class="pricing-highlight"><p><strong>Fourchette indicative :</strong> nos pièces se situent entre 2 500 € et 8 000 €, selon la taille, l'essence et la complexité. Chaque projet fait l'objet d'un devis précis.</p></div><p>Nous ne pratiquons pas de prix catalogue. Le budget est discuté dès le premier échange.</p></div></div></section>
+            <section class="section section--dark cta-final"><div class="container"><div class="cta-final__content reveal"><h2 class="cta-final__title">Prêt à démarrer ?</h2><p class="cta-final__text">Total estimé : 10 à 16 semaines de votre premier message à votre pièce chez vous.</p><div class="btn btn--light" data-page="votre-projet">Parlons de votre projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div></section>
+        </div>
+
+        <!-- ==================== PAGE: À PROPOS ==================== -->
+        <div class="page" id="page-a-propos">
+            <section class="page-hero"><div class="container"><h1 class="reveal">Qui sommes-nous</h1><p class="reveal">Derrière chaque pièce Woodiram, il y a une conviction : le beau prend du temps.</p></div></section>
+            <section class="section"><div class="container"><div class="story reveal"><h2>Notre histoire</h2><p>Tout a commencé lors d'un voyage en Thaïlande, dans la région de Buriram. Là-bas, nous avons découvert des ateliers où le bois est encore travaillé comme il l'a toujours été : avec patience, respect, expertise.</p><p>Des artisans qui prennent le temps de lire le bois. Des plateaux monumentaux, taillés dans des sections entières de troncs, avec des veines qu'aucune machine ne pourrait reproduire.</p><p>Nous avons voulu rendre ces pièces accessibles — sans les dénaturer. Sans sacrifier l'unicité, le caractère, l'histoire.</p><p>Woodiram est né de cette envie : créer un pont entre ces artisans thaïlandais et des clients européens qui cherchent l'exception.</p></div></div></section>
+            <section class="section section--alt"><div class="container"><div class="name-origin reveal"><div class="name-origin__icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="8"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg></div><h2>Pourquoi Woodiram ?</h2><p>Le nom est une contraction de « Wood » et « Buriram », la région de Thaïlande où se trouvent nos artisans.</p><span class="name-origin__highlight">Wood + Buriram = Woodiram</span></div></div></section>
+            <section class="section"><div class="container"><div class="values-header reveal"><h2>Ce qui nous guide</h2><p>Trois principes, une seule exigence : faire les choses bien.</p></div><div class="values-grid">
+                <div class="value-card reveal reveal-delay-1"><div class="value-card__icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 8v8l5 3"/></svg></div><h3 class="value-card__title">Ralentir, pas presser</h3><p class="value-card__text">Une pièce d'exception demande du temps.</p></div>
+                <div class="value-card reveal reveal-delay-2"><div class="value-card__icon"><svg viewBox="0 0 32 32"><path d="M16 4v24M4 16h24"/><circle cx="16" cy="16" r="4"/></svg></div><h3 class="value-card__title">L'unicité avant tout</h3><p class="value-card__text">Chaque pièce est singulière. Pas de copies.</p></div>
+                <div class="value-card reveal reveal-delay-3"><div class="value-card__icon"><svg viewBox="0 0 32 32"><path d="M8 16l6 6 10-12"/><rect x="4" y="4" width="24" height="24" rx="4"/></svg></div><h3 class="value-card__title">Transparence totale</h3><p class="value-card__text">Pas de frais cachés. Le prix inclut tout.</p></div>
+            </div></div></section>
+            <section class="section section--dark quote-section"><div class="container"><p class="quote reveal" style="color:var(--text-light)">Nous n'apportons pas un meuble chez vous. Nous apportons une partie de l'arbre.</p></div></section>
+            <section class="section cta-final" style="background:var(--bg-primary)"><div class="container"><div class="cta-final__content reveal"><h2 style="color:var(--text-primary)">Envie d'en discuter ?</h2><p style="color:var(--text-secondary);margin-bottom:2rem">Si notre approche vous parle, racontez-nous votre projet.</p><div class="cta-final__buttons"><div class="btn btn--primary" data-page="votre-projet">Démarrer un projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="btn btn--secondary" data-page="realisations">Voir nos réalisations</div></div></div></div></section>
+        </div>
+        <!-- ==================== PAGE: VOTRE PROJET ==================== -->
+        <div class="page" id="page-votre-projet">
+            <section class="page-hero"><div class="container"><h1 class="reveal">Votre projet</h1><p class="reveal">Parlez-nous de ce que vous imaginez. Nous reviendrons vers vous sous 48h — sans engagement, sans pression.</p></div></section>
+            <section class="section" style="padding-top:0"><div class="container">
+                <div class="profile-selector reveal">
+                    <button class="profile-selector__btn active" data-profile="particulier">Particulier</button>
+                    <button class="profile-selector__btn" data-profile="professionnel">Professionnel</button>
+                </div>
+                <div class="contact-grid">
+                    <div class="form-panel active" id="form-particulier"><form class="form reveal" id="contactFormParticulier">
+                        <div class="form-row"><div class="form-group"><label>Prénom <span class="required">*</span></label><input type="text" required placeholder="Votre prénom"></div><div class="form-group"><label>Email <span class="required">*</span></label><input type="email" required placeholder="votre@email.com"></div></div>
+                        <div class="form-row"><div class="form-group"><label>Téléphone</label><input type="tel" placeholder="+33 6 12 34 56 78"></div><div class="form-group"><label>Type de pièce</label><select><option value="">Sélectionnez...</option><option>Table à manger</option><option>Table basse</option><option>Console</option><option>Buffet</option><option>Banc</option><option>Autre</option></select></div></div>
+                        <div class="form-group"><label>Décrivez votre projet</label><textarea placeholder="Dimensions, essence, usage, ambiance..."></textarea></div>
+                        <div class="form-group"><label>Budget indicatif (optionnel)</label><input type="text" placeholder="ex : 5 000 - 8 000 €"></div>
+                        <div class="form-group"><label>Photo d'inspiration (optionnel)</label><div class="upload-zone" id="uploadZone"><div class="upload-zone__icon"><svg viewBox="0 0 48 48"><path d="M24 32V16M16 24l8-8 8 8"/><rect x="8" y="8" width="32" height="32" rx="4"/></svg></div><p class="upload-zone__text"><strong>Cliquez</strong> ou glissez un fichier</p><p class="upload-zone__hint">PNG, JPG ou PDF — Max 5 Mo</p></div><input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.pdf" style="display:none"></div>
+                        <button type="submit" class="form-submit">Envoyer mon projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                    </form></div>
+                    <div class="form-panel" id="form-professionnel"><form class="form reveal" id="contactFormPro">
+                        <div class="form-row"><div class="form-group"><label>Nom <span class="required">*</span></label><input type="text" required placeholder="Votre nom"></div><div class="form-group"><label>Entreprise <span class="required">*</span></label><input type="text" required placeholder="Votre entreprise"></div></div>
+                        <div class="form-row"><div class="form-group"><label>Email pro <span class="required">*</span></label><input type="email" required placeholder="pro@entreprise.com"></div><div class="form-group"><label>Téléphone</label><input type="tel" placeholder="+33 1 23 45 67 89"></div></div>
+                        <div class="form-group"><label>Activité</label><select><option value="">Sélectionnez...</option><option>Architecte d'intérieur</option><option>Designer</option><option>Hôtellerie / Restauration</option><option>Promoteur</option><option>Autre</option></select></div>
+                        <div class="form-group"><label>Décrivez votre projet</label><textarea placeholder="Nombre de pièces, type de projet, contraintes..."></textarea></div>
+                        <button type="submit" class="form-submit">Envoyer ma demande <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                    </form></div>
+                    <div class="contact-aside reveal">
+                        <div class="contact-alt"><div class="contact-alt__icon"><svg viewBox="0 0 48 48"><rect x="8" y="12" width="32" height="24" rx="2"/><path d="M8 16l16 10 16-10"/></svg></div><h3>Ou parlons-en directement</h3><p>Vous préférez un échange direct ? Écrivez-nous ou réservez un créneau de 30 minutes.</p><a href="mailto:contact@woodiram.com" class="btn btn--secondary" style="width:100%;justify-content:center">contact@woodiram.com</a></div>
+                        <div class="contact-next"><h3>Ce qui se passe ensuite</h3><ol class="contact-next__steps"><li>Nous recevons votre message et l'étudions.</li><li>Nous vous répondons sous 48h avec nos premières idées.</li><li>Nous organisons un appel visio si le projet vous intéresse.</li><li>Le sourcing commence — sans engagement tant que vous n'avez pas validé.</li></ol></div>
+                    </div>
+                </div>
+            </div></section>
+        </div>
+    </main>
+
+    <!-- MODAL -->
+    <div class="modal-backdrop" id="modal"><div class="modal">
+        <div class="modal__header"><button class="modal__close" id="modalClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+        <div class="modal__carousel">Photo réalisation — assets/images/realisations/</div>
+        <div class="modal__content">
+            <h2 class="modal__title" id="modalTitle">Nom</h2>
+            <p class="modal__story" id="modalStory">Description</p>
+            <div class="modal__specs">
+                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14"/><circle cx="16" cy="16" r="6" stroke-dasharray="3 3"/></svg><div class="modal__spec-value" id="modalEssence">Suar</div><div class="modal__spec-label">Essence</div></div>
+                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M4 28h24M8 28V12h4v16M14 28V8h4v20M20 28V16h4v12"/></svg><div class="modal__spec-value" id="modalDims">280×95</div><div class="modal__spec-label">Dimensions</div></div>
+                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="12" rx="2"/><path d="M10 14V10a6 6 0 1 1 12 0v4"/></svg><div class="modal__spec-value" id="modalFeet">Bois</div><div class="modal__spec-label">Piètement</div></div>
+                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10"/><path d="M16 10v6l4 2"/></svg><div class="modal__spec-value" id="modalAge">~150 ans</div><div class="modal__spec-label">Âge</div></div>
+                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M16 4v24M8 12l8-8 8 8M8 20l8 8 8-8"/></svg><div class="modal__spec-value" id="modalWeight">~85 kg</div><div class="modal__spec-label">Poids</div></div>
+                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M6 26c0-10 5-15 10-20M26 26c0-10-5-15-10-20"/></svg><div class="modal__spec-value">Live edge</div><div class="modal__spec-label">Bord</div></div>
+            </div>
+            <div class="modal__cta" data-page="votre-projet">Imaginez la vôtre <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+    </div></div>
+
+    <!-- FOOTER -->
+    <footer class="footer"><div class="container">
+        <div class="footer__inner">
+            <div class="footer__brand"><div class="footer__logo"><div class="footer__logo-icon"><img src="assets/logos/Logo_Avatar_200x200.png" alt="Woodiram" style="width:100%;height:100%;object-fit:contain;border-radius:50%;"></div><span class="footer__logo-text">WOODIRAM</span></div><p class="footer__tagline">Mobilier bois massif sur mesure, créé par des artisans thaïlandais. Pièces uniques livrées en France.</p></div>
+            <div class="footer__col"><h4>Navigation</h4><ul><li><a data-page="realisations">Réalisations</a></li><li><a data-page="savoir-faire">Savoir-faire</a></li><li><a data-page="notre-approche">Notre Approche</a></li><li><a data-page="a-propos">À Propos</a></li></ul></div>
+            <div class="footer__col"><h4>Contact</h4><ul><li><a data-page="votre-projet">Démarrer un projet</a></li><li><a href="mailto:contact@woodiram.com">contact@woodiram.com</a></li></ul></div>
+            <div class="footer__col"><h4>Légal</h4><ul><li><a href="#">Mentions légales</a></li><li><a href="#">Confidentialité</a></li></ul></div>
+        </div>
+        <div class="footer__bottom"><p>© 2025 Woodiram. Tous droits réservés.</p><div class="footer__legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a></div></div>
+    </div></footer>
+
+    <script>
+        // ========== NAVIGATION SPA ==========
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('page-' + pageId);
+            if (target) target.classList.add('active');
+            document.querySelectorAll('.header__nav a').forEach(l => { l.classList.toggle('active', l.dataset.page === pageId); });
+            document.querySelectorAll('.mobile-menu a').forEach(l => { l.classList.toggle('active', l.dataset.page === pageId); });
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('menuBtn').classList.remove('open');
+            document.body.classList.remove('no-scroll');
+            closeModal();
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            setTimeout(() => { document.querySelectorAll('.page.active .reveal').forEach(el => el.classList.remove('visible')); initReveal(); }, 50);
+        }
+        document.querySelectorAll('[data-page]').forEach(el => { el.addEventListener('click', e => { e.preventDefault(); navigateTo(el.dataset.page); }); });
+
+        // ========== MOBILE MENU ==========
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => { menuBtn.classList.toggle('open'); mobileMenu.classList.toggle('open'); document.body.classList.toggle('no-scroll'); });
+
+        // ========== HEADER SCROLL ==========
+        window.addEventListener('scroll', () => { document.getElementById('header').classList.toggle('scrolled', window.pageYOffset > 50); });
+
+        // ========== REVEAL ==========
+        function initReveal() {
+            const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.15 });
+            document.querySelectorAll('.page.active .reveal:not(.visible)').forEach(el => obs.observe(el));
+        }
+        initReveal();
+
+        // ========== GALLERY ==========
+        const galleryData = [
+            { name: "L'Horizon", essence: "Suar", dims: "280 × 95 cm", weight: "~85 kg", age: "~150 ans", feet: "Bois massif", type: "Table" },
+            { name: "Racine d'Ombre", essence: "Acacia", dims: "180 × 85 cm", weight: "~60 kg", age: "~120 ans", feet: "Métal noir", type: "Console" },
+            { name: "Écorce Vivante", essence: "Teak", dims: "120 × 80 cm", weight: "~45 kg", age: "~100 ans", feet: "Bois massif", type: "Table basse" },
+            { name: "La Traversée", essence: "Padouk", dims: "220 × 50 cm", weight: "~55 kg", age: "~130 ans", feet: "Métal bronze", type: "Buffet" },
+            { name: "Silence", essence: "Suar", dims: "320 × 110 cm", weight: "~110 kg", age: "~200 ans", feet: "Bois massif", type: "Table XL" },
+            { name: "L'Ancre", essence: "Acacia", dims: "160 × 45 cm", weight: "~35 kg", age: "~80 ans", feet: "Métal noir", type: "Console" },
+            { name: "Murmure", essence: "Teak", dims: "250 × 90 cm", weight: "~75 kg", age: "~140 ans", feet: "Bois massif", type: "Table" },
+            { name: "Souffle", essence: "Suar", dims: "140 × 70 cm", weight: "~40 kg", age: "~90 ans", feet: "Bois massif", type: "Table basse" },
+            { name: "Crépuscule", essence: "Acacia", dims: "300 × 100 cm", weight: "~95 kg", age: "~180 ans", feet: "Métal bronze", type: "Table XL" },
+            { name: "Le Passage", essence: "Teak", dims: "180 × 40 cm", weight: "~30 kg", age: "~110 ans", feet: "Bois massif", type: "Banc" },
+            { name: "Aurore", essence: "Suar", dims: "260 × 95 cm", weight: "~80 kg", age: "~160 ans", feet: "Métal noir", type: "Table" },
+            { name: "Refuge", essence: "Padouk", dims: "200 × 55 cm", weight: "~50 kg", age: "~120 ans", feet: "Bois massif", type: "Console" }
+        ];
+        const grid = document.getElementById('galleryGrid');
+        if (grid) { galleryData.forEach((item, i) => {
+            const c = document.createElement('div'); c.className = 'gallery-item reveal'; c.style.transitionDelay = `${(i%4)*50}ms`;
+            c.innerHTML = `${item.type}<div class="gallery-item__overlay"><div class="gallery-item__info"><h3 class="gallery-item__name">${item.name}</h3><span class="gallery-item__essence">${item.essence}</span></div></div>`;
+            c.addEventListener('click', () => openModal(item)); grid.appendChild(c);
+        }); }
+
+        // ========== MODAL ==========
+        const modal = document.getElementById('modal');
+        function openModal(item) {
+            document.getElementById('modalTitle').textContent = item.name;
+            document.getElementById('modalEssence').textContent = item.essence;
+            document.getElementById('modalDims').textContent = item.dims;
+            document.getElementById('modalWeight').textContent = item.weight;
+            document.getElementById('modalAge').textContent = item.age;
+            document.getElementById('modalFeet').textContent = item.feet;
+            const stories = [`Taillée dans un ${item.essence} centenaire, cette pièce a rejoint un intérieur contemporain.`, `Les veines naturelles du bois racontent des décennies de croissance paisible.`, `Une pièce maîtresse, conçue pour traverser les générations.`];
+            document.getElementById('modalStory').textContent = stories[Math.floor(Math.random()*stories.length)];
+            modal.classList.add('active'); document.body.classList.add('no-scroll');
+        }
+        function closeModal() { modal.classList.remove('active'); document.body.classList.remove('no-scroll'); }
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        // ========== PROFILE SELECTOR ==========
+        document.querySelectorAll('.profile-selector__btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.profile-selector__btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+                document.getElementById('form-' + btn.dataset.profile).classList.add('active');
+                setTimeout(initReveal, 50);
+            });
+        });
+
+        // ========== UPLOAD ZONE ==========
+        const uz = document.getElementById('uploadZone');
+        const fi = document.getElementById('fileInput');
+        if (uz && fi) { uz.addEventListener('click', () => fi.click()); uz.addEventListener('dragover', e => { e.preventDefault(); uz.style.borderColor = 'var(--primary)'; }); uz.addEventListener('dragleave', () => uz.style.borderColor = 'var(--border)'); }
+
+        // ========== FORMS (demo) ==========
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const btn = form.querySelector('.form-submit');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '✓ Mode démo — envoi désactivé';
+                btn.style.backgroundColor = 'var(--success)';
+                btn.disabled = true;
+                setTimeout(() => { btn.innerHTML = orig; btn.style.backgroundColor = ''; btn.disabled = false; }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
