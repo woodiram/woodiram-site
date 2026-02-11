@@ -515,18 +515,32 @@
                 </div>
                 <div class="contact-grid">
                     <div class="form-panel active" id="form-particulier"><form class="form reveal" id="contactFormParticulier" action="https://formspree.io/f/mpqjqllb" method="POST">
-                        <div class="form-row"><div class="form-group"><label>Prénom <span class="required">*</span></label><input type="text" required placeholder="Votre prénom"></div><div class="form-group"><label>Email <span class="required">*</span></label><input type="email" required placeholder="votre@email.com"></div></div>
-                        <div class="form-row"><div class="form-group"><label>Téléphone</label><input type="tel" placeholder="+33 6 12 34 56 78"></div><div class="form-group"><label>Type de pièce</label><select><option value="">Sélectionnez...</option><option>Table à manger</option><option>Table basse</option><option>Console</option><option>Buffet</option><option>Banc</option><option>Autre</option></select></div></div>
-                        <div class="form-group"><label>Décrivez votre projet</label><textarea placeholder="Dimensions, essence, usage, ambiance..."></textarea></div>
-                        <div class="form-group"><label>Budget indicatif (optionnel)</label><input type="text" placeholder="ex : 5 000 - 8 000 €"></div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Prénom <span class="required">*</span></label><input type="text" required placeholder="Votre prénom" name="prenom"></div>
+                            <div class="form-group"><label>Email <span class="required">*</span></label><input type="email" required placeholder="votre@email.com" name="email"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="+33 6 12 34 56 78" name="telephone"></div>
+                            <div class="form-group"><label>Type de pièce</label><select name="type_piece"><option value="">Sélectionnez...</option><option>Table à manger</option><option>Table basse</option><option>Console</option><option>Buffet</option><option>Banc</option><option>Autre</option></select></div>
+                        </div>
+                        <div class="form-group"><label>Décrivez votre projet</label><textarea placeholder="Dimensions, essence, usage, ambiance..." name="description"></textarea></div>
+                        <div class="form-group"><label>Budget indicatif (optionnel)</label><input type="text" placeholder="ex : 5 000 - 8 000 €" name="budget"></div>
                         <div class="form-group"><label>Photo d'inspiration (optionnel)</label><div class="upload-zone" id="uploadZone"><div class="upload-zone__icon"><svg viewBox="0 0 48 48"><path d="M24 32V16M16 24l8-8 8 8"/><rect x="8" y="8" width="32" height="32" rx="4"/></svg></div><p class="upload-zone__text"><strong>Cliquez</strong> ou glissez un fichier</p><p class="upload-zone__hint">PNG, JPG ou PDF — Max 5 Mo</p></div><input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.pdf" style="display:none"></div>
                         <button type="submit" class="form-submit">Envoyer mon projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
                     </form></div>
                     <div class="form-panel" id="form-professionnel"><form class="form reveal" id="contactFormPro" action="https://formspree.io/f/xkovozve" method="POST">
-                        <div class="form-row"><div class="form-group"><label>Nom <span class="required">*</span></label><input type="text" required placeholder="Votre nom"></div><div class="form-group"><label>Entreprise <span class="required">*</span></label><input type="text" required placeholder="Votre entreprise"></div></div>
-                        <div class="form-row"><div class="form-group"><label>Email pro <span class="required">*</span></label><input type="email" required placeholder="pro@entreprise.com"></div><div class="form-group"><label>Téléphone</label><input type="tel" placeholder="+33 1 23 45 67 89"></div></div>
-                        <div class="form-group"><label>Activité</label><select><option value="">Sélectionnez...</option><option>Architecte d'intérieur</option><option>Designer</option><option>Hôtellerie / Restauration</option><option>Promoteur</option><option>Autre</option></select></div>
-                        <div class="form-group"><label>Décrivez votre projet</label><textarea placeholder="Nombre de pièces, type de projet, contraintes..."></textarea></div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Nom <span class="required">*</span></label><input type="text" required placeholder="Votre nom" name="nom"></div>
+                            <div class="form-group"><label>Entreprise <span class="required">*</span></label><input type="text" required placeholder="Votre entreprise" name="entreprise"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Email pro <span class="required">*</span></label><input type="email" required placeholder="pro@entreprise.com" name="email"></div>
+                            <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="+33 1 23 45 67 89" name="telephone"></div>
+                        </div>
+                        <div class="form-group"><label>Activité</label><select name="activite"><option value="">Sélectionnez...</option><option>Architecte d'intérieur</option><option>Designer</option><option>Hôtellerie / Restauration</option><option>Promoteur</option><option>Autre</option></select></div>
+                        <div class="form-group"><label>Décrivez votre projet</label><textarea placeholder="Nombre de pièces, type de projet, contraintes..." name="description"></textarea></div>
+                        <div class="form-group"><label>Budget indicatif (optionnel)</label><input type="text" placeholder="ex : 10 000 - 25 000 €" name="budget"></div>
+                        <div class="form-group"><label>Délai souhaité (optionnel)</label><input type="text" placeholder="ex : Livraison été 2026" name="delai"></div>
                         <button type="submit" class="form-submit">Envoyer ma demande <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
                     </form></div>
                     <div class="contact-aside reveal">
