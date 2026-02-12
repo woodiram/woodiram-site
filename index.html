@@ -670,18 +670,6 @@
         const fi = document.getElementById('fileInput');
         if (uz && fi) { uz.addEventListener('click', () => fi.click()); uz.addEventListener('dragover', e => { e.preventDefault(); uz.style.borderColor = 'var(--primary)'; }); uz.addEventListener('dragleave', () => uz.style.borderColor = 'var(--border)'); }
 
-        // ========== FORMS (demo) ==========
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', e => {
-                e.preventDefault();
-                const btn = form.querySelector('.form-submit');
-                const orig = btn.innerHTML;
-                btn.innerHTML = '✓ Mode démo — envoi désactivé';
-                btn.style.backgroundColor = 'var(--success)';
-                btn.disabled = true;
-                setTimeout(() => { btn.innerHTML = orig; btn.style.backgroundColor = ''; btn.disabled = false; }, 3000);
-            });
-        });
     </script>
 </body>
 </html>
