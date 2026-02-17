@@ -326,7 +326,22 @@
         .modal__close { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background-color var(--dur-short); }
         .modal__close:hover { background-color: var(--bg-secondary); }
         .modal__close svg { width: 24px; height: 24px; stroke: var(--text-primary); stroke-width: 2; }
-        .modal__carousel { position: relative; aspect-ratio: 16/10; background: var(--placeholder); margin: 0 1.25rem; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.875rem; }
+        .modal__carousel { position: relative; background: var(--placeholder); margin: 0 1.25rem; border-radius: 4px; overflow: hidden; }
+        .modal__carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); will-change: transform; }
+        .modal__carousel-slide { flex: 0 0 85%; aspect-ratio: 16/10; position: relative; margin-right: 2%; }
+        .modal__carousel-slide:last-child { margin-right: 0; }
+        .modal__carousel.single-image .modal__carousel-slide { flex: 0 0 100%; margin-right: 0; }
+        .modal__carousel-slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; display: block; }
+        .modal__carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(250,248,245,0.9); display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; z-index: 2; transition: all var(--dur-short); opacity: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+        .modal__carousel:hover .modal__carousel-btn { opacity: 1; }
+        .modal__carousel-btn:hover { background: rgba(250,248,245,1); transform: translateY(-50%) scale(1.08); box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+        .modal__carousel-btn--prev { left: 0.75rem; }
+        .modal__carousel-btn--next { right: 0.75rem; }
+        .modal__carousel-btn svg { width: 20px; height: 20px; stroke: var(--text-primary); stroke-width: 2; fill: none; }
+        .modal__carousel-dots { display: flex; gap: 0.5rem; justify-content: center; padding: 1rem 0 0.5rem; }
+        .modal__carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; transition: all var(--dur-short); }
+        .modal__carousel-dot.active { background: var(--primary); transform: scale(1.25); }
+        @media (max-width: 768px) { .modal__carousel-slide { flex: 0 0 92%; margin-right: 3%; } }
         .modal__content { padding: 1.25rem; }
         .modal__title { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 0.5rem; }
         .modal__story { color: var(--text-secondary); font-style: italic; margin-bottom: 1.5rem; font-size: 0.9375rem; }
@@ -419,7 +434,7 @@
                     <div class="savoir-faire__text"><p>Chaque pièce Woodiram naît dans un atelier thaïlandais, entre les mains d'artisans qui ont appris à lire le bois avant de le travailler.</p><p>Ils ne fabriquent pas en série. Ils prennent le temps.</p></div>
                     <div class="btn btn--ghost" data-page="savoir-faire">Découvrir leur savoir-faire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
                 </div>
-                <div class="savoir-faire__image reveal">Photo artisan — assets/images/savoir-faire/artisan.png</div>
+                <div class="savoir-faire__image reveal"><img src="assets/images/Assets Website_Accueil_Le savoir faire.avif" alt="Artisan thaïlandais travaillant le bois" style="width:100%;height:100%;object-fit:cover;"></div>
             </div></div></section>
 
             <section class="section section--alt"><div class="container">
@@ -515,6 +530,8 @@
                 </div>
                 <div class="contact-grid">
                     <div class="form-panel active" id="form-particulier"><form class="form reveal" id="contactFormParticulier" action="https://formspree.io/f/mpqjqllb" method="POST">
+                        <input type="hidden" name="_next" value="https://woodiram.com">
+                        <input type="hidden" name="_subject" value="Nouveau projet — Particulier">
                         <div class="form-row">
                             <div class="form-group"><label>Prénom <span class="required">*</span></label><input type="text" required placeholder="Votre prénom" name="prenom"></div>
                             <div class="form-group"><label>Email <span class="required">*</span></label><input type="email" required placeholder="votre@email.com" name="email"></div>
@@ -529,6 +546,8 @@
                         <button type="submit" class="form-submit">Envoyer mon projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
                     </form></div>
                     <div class="form-panel" id="form-professionnel"><form class="form reveal" id="contactFormPro" action="https://formspree.io/f/xkovozve" method="POST">
+                        <input type="hidden" name="_next" value="https://woodiram.com">
+                        <input type="hidden" name="_subject" value="Nouveau projet — Professionnel">
                         <div class="form-row">
                             <div class="form-group"><label>Nom <span class="required">*</span></label><input type="text" required placeholder="Votre nom" name="nom"></div>
                             <div class="form-group"><label>Entreprise <span class="required">*</span></label><input type="text" required placeholder="Votre entreprise" name="entreprise"></div>
@@ -555,7 +574,7 @@
     <!-- MODAL -->
     <div class="modal-backdrop" id="modal"><div class="modal">
         <div class="modal__header"><button class="modal__close" id="modalClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
-        <div class="modal__carousel">Photo réalisation — assets/images/realisations/</div>
+        <div class="modal__carousel" id="modalCarousel"></div>
         <div class="modal__content">
             <h2 class="modal__title" id="modalTitle">Nom</h2>
             <p class="modal__story" id="modalStory">Description</p>
@@ -616,28 +635,92 @@
 
         // ========== GALLERY ==========
         const galleryData = [
-            { name: "L'Horizon", essence: "Suar", dims: "280 × 95 cm", weight: "~85 kg", age: "~150 ans", feet: "Bois massif", type: "Table" },
-            { name: "Racine d'Ombre", essence: "Acacia", dims: "180 × 85 cm", weight: "~60 kg", age: "~120 ans", feet: "Métal noir", type: "Console" },
-            { name: "Écorce Vivante", essence: "Teak", dims: "120 × 80 cm", weight: "~45 kg", age: "~100 ans", feet: "Bois massif", type: "Table basse" },
-            { name: "La Traversée", essence: "Padouk", dims: "220 × 50 cm", weight: "~55 kg", age: "~130 ans", feet: "Métal bronze", type: "Buffet" },
-            { name: "Silence", essence: "Suar", dims: "320 × 110 cm", weight: "~110 kg", age: "~200 ans", feet: "Bois massif", type: "Table XL" },
-            { name: "L'Ancre", essence: "Acacia", dims: "160 × 45 cm", weight: "~35 kg", age: "~80 ans", feet: "Métal noir", type: "Console" },
-            { name: "Murmure", essence: "Teak", dims: "250 × 90 cm", weight: "~75 kg", age: "~140 ans", feet: "Bois massif", type: "Table" },
-            { name: "Souffle", essence: "Suar", dims: "140 × 70 cm", weight: "~40 kg", age: "~90 ans", feet: "Bois massif", type: "Table basse" },
-            { name: "Crépuscule", essence: "Acacia", dims: "300 × 100 cm", weight: "~95 kg", age: "~180 ans", feet: "Métal bronze", type: "Table XL" },
-            { name: "Le Passage", essence: "Teak", dims: "180 × 40 cm", weight: "~30 kg", age: "~110 ans", feet: "Bois massif", type: "Banc" },
-            { name: "Aurore", essence: "Suar", dims: "260 × 95 cm", weight: "~80 kg", age: "~160 ans", feet: "Métal noir", type: "Table" },
-            { name: "Refuge", essence: "Padouk", dims: "200 × 55 cm", weight: "~50 kg", age: "~120 ans", feet: "Bois massif", type: "Console" }
+            { name: "L'Horizon", essence: "Suar", dims: "280 × 95 cm", weight: "~85 kg", age: "~150 ans", feet: "Bois massif", type: "Table", images: ["assets/images/Assets_Realisation_001_A.avif", "assets/images/Assets_Realisation_001_B.avif"] },
+            { name: "Racine d'Ombre", essence: "Acacia", dims: "180 × 85 cm", weight: "~60 kg", age: "~120 ans", feet: "Métal noir", type: "Console", images: ["assets/images/Assets_Realisation_002_A.avif", "assets/images/Assets_Realisation_002_B.avif"] },
+            { name: "Écorce Vivante", essence: "Teak", dims: "120 × 80 cm", weight: "~45 kg", age: "~100 ans", feet: "Bois massif", type: "Table basse", images: ["assets/images/Assets_Realisation_003_A.avif", "assets/images/Assets_Realisation_003_B.avif"] },
+            { name: "La Traversée", essence: "Padouk", dims: "220 × 50 cm", weight: "~55 kg", age: "~130 ans", feet: "Métal bronze", type: "Buffet", images: ["assets/images/Assets_Realisation_004_A.avif"] },
+            { name: "Silence", essence: "Suar", dims: "320 × 110 cm", weight: "~110 kg", age: "~200 ans", feet: "Bois massif", type: "Table XL", images: ["assets/images/Assets_Realisation_005_A.avif", "assets/images/Assets_Realisation_005_B.avif"] },
+            { name: "L'Ancre", essence: "Acacia", dims: "160 × 45 cm", weight: "~35 kg", age: "~80 ans", feet: "Métal noir", type: "Console", images: ["assets/images/Assets_Realisation_006_A.avif"] },
+            { name: "Murmure", essence: "Teak", dims: "250 × 90 cm", weight: "~75 kg", age: "~140 ans", feet: "Bois massif", type: "Table", images: ["assets/images/Assets_Realisation_007_A.avif"] },
+            { name: "Souffle", essence: "Suar", dims: "140 × 70 cm", weight: "~40 kg", age: "~90 ans", feet: "Bois massif", type: "Table basse", images: ["assets/images/Assets_Realisation_008_A.avif", "assets/images/Assets_Realisation_008_B.avif"] },
+            { name: "Crépuscule", essence: "Acacia", dims: "300 × 100 cm", weight: "~95 kg", age: "~180 ans", feet: "Métal bronze", type: "Table XL", images: ["assets/images/Assets_Realisation_009_A.avif", "assets/images/Assets_Realisation_009_B.avif"] },
+            { name: "Le Passage", essence: "Teak", dims: "180 × 40 cm", weight: "~30 kg", age: "~110 ans", feet: "Bois massif", type: "Banc", images: ["assets/images/Assets_Realisation_010_A.avif", "assets/images/Assets_Realisation_010_B.avif"] },
+            { name: "Aurore", essence: "Suar", dims: "260 × 95 cm", weight: "~80 kg", age: "~160 ans", feet: "Métal noir", type: "Table", images: [] },
+            { name: "Refuge", essence: "Padouk", dims: "200 × 55 cm", weight: "~50 kg", age: "~120 ans", feet: "Bois massif", type: "Console", images: [] }
         ];
         const grid = document.getElementById('galleryGrid');
         if (grid) { galleryData.forEach((item, i) => {
             const c = document.createElement('div'); c.className = 'gallery-item reveal'; c.style.transitionDelay = `${(i%4)*50}ms`;
-            c.innerHTML = `${item.type}<div class="gallery-item__overlay"><div class="gallery-item__info"><h3 class="gallery-item__name">${item.name}</h3><span class="gallery-item__essence">${item.essence}</span></div></div>`;
+            const imgHtml = item.images.length > 0
+                ? `<img src="${item.images[0]}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">`
+                : item.type;
+            c.innerHTML = `${imgHtml}<div class="gallery-item__overlay"><div class="gallery-item__info"><h3 class="gallery-item__name">${item.name}</h3><span class="gallery-item__essence">${item.essence}</span></div></div>`;
             c.addEventListener('click', () => openModal(item)); grid.appendChild(c);
         }); }
 
         // ========== MODAL ==========
         const modal = document.getElementById('modal');
+        const modalCarousel = document.getElementById('modalCarousel');
+        let carouselIndex = 0;
+        let carouselImages = [];
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function buildCarousel(images) {
+            carouselImages = images;
+            carouselIndex = 0;
+            let html = '';
+            if (images.length === 0) {
+                modalCarousel.innerHTML = '<div style="aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:0.875rem;">Photo à venir</div>';
+                return;
+            }
+            const isSingle = images.length === 1;
+            modalCarousel.classList.toggle('single-image', isSingle);
+            html += '<div class="modal__carousel-track">';
+            images.forEach((src, i) => {
+                html += `<div class="modal__carousel-slide"><img src="${src}" alt="Photo ${i + 1}"></div>`;
+            });
+            html += '</div>';
+            if (!isSingle) {
+                html += `<button class="modal__carousel-btn modal__carousel-btn--prev" onclick="carouselNav(-1)"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>`;
+                html += `<button class="modal__carousel-btn modal__carousel-btn--next" onclick="carouselNav(1)"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>`;
+                html += `<div class="modal__carousel-dots">`;
+                images.forEach((_, i) => { html += `<button class="modal__carousel-dot ${i === 0 ? 'active' : ''}" onclick="carouselGoTo(${i})"></button>`; });
+                html += `</div>`;
+            }
+            modalCarousel.innerHTML = html;
+            const track = modalCarousel.querySelector('.modal__carousel-track');
+            if (track) {
+                track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+                track.addEventListener('touchend', e => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const diff = touchStartX - touchEndX;
+                    if (Math.abs(diff) > 50) { diff > 0 ? carouselNav(1) : carouselNav(-1); }
+                }, {passive: true});
+            }
+            updateCarouselPosition();
+        }
+
+        function carouselNav(dir) {
+            const newIdx = carouselIndex + dir;
+            if (newIdx < 0 || newIdx >= carouselImages.length) return;
+            carouselGoTo(newIdx);
+        }
+
+        function carouselGoTo(idx) {
+            carouselIndex = idx;
+            modalCarousel.querySelectorAll('.modal__carousel-dot').forEach((dot, i) => dot.classList.toggle('active', i === idx));
+            updateCarouselPosition();
+        }
+
+        function updateCarouselPosition() {
+            const track = modalCarousel.querySelector('.modal__carousel-track');
+            if (!track) return;
+            const isSingle = modalCarousel.classList.contains('single-image');
+            const slideWidth = isSingle ? 100 : 87;
+            track.style.transform = `translateX(-${carouselIndex * slideWidth}%)`;
+        }
+
         function openModal(item) {
             document.getElementById('modalTitle').textContent = item.name;
             document.getElementById('modalEssence').textContent = item.essence;
@@ -647,12 +730,13 @@
             document.getElementById('modalFeet').textContent = item.feet;
             const stories = [`Taillée dans un ${item.essence} centenaire, cette pièce a rejoint un intérieur contemporain.`, `Les veines naturelles du bois racontent des décennies de croissance paisible.`, `Une pièce maîtresse, conçue pour traverser les générations.`];
             document.getElementById('modalStory').textContent = stories[Math.floor(Math.random()*stories.length)];
+            buildCarousel(item.images);
             modal.classList.add('active'); document.body.classList.add('no-scroll');
         }
         function closeModal() { modal.classList.remove('active'); document.body.classList.remove('no-scroll'); }
         document.getElementById('modalClose').addEventListener('click', closeModal);
         modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); if (e.key === 'ArrowLeft' && modal.classList.contains('active')) carouselNav(-1); if (e.key === 'ArrowRight' && modal.classList.contains('active')) carouselNav(1); });
 
         // ========== PROFILE SELECTOR ==========
         document.querySelectorAll('.profile-selector__btn').forEach(btn => {
