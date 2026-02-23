@@ -316,6 +316,16 @@
         .contact-next__steps { counter-reset: steps; }
         .contact-next__steps li { counter-increment: steps; display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; font-size: 0.9375rem; color: var(--text-secondary); }
         .contact-next__steps li::before { content: counter(steps); flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background-color: var(--bg-secondary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: var(--primary); }
+        .form-feedback { text-align: center; padding: 3rem 2rem; }
+        .form-feedback__icon { width: 64px; height: 64px; margin: 0 auto 1.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .form-feedback__icon--success { background-color: rgba(109,125,94,0.12); }
+        .form-feedback__icon--error { background-color: rgba(158,74,74,0.12); }
+        .form-feedback__icon svg { width: 32px; height: 32px; stroke-width: 2; fill: none; }
+        .form-feedback__icon--success svg { stroke: var(--success); }
+        .form-feedback__icon--error svg { stroke: var(--error); }
+        .form-feedback__title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.75rem; }
+        .form-feedback__text { font-size: 1rem; color: var(--text-secondary); line-height: 1.7; max-width: 400px; margin: 0 auto; }
+        .form-feedback__text a { color: var(--primary); text-decoration: underline; }
 
         /* MODAL */
         .modal-backdrop { position: fixed; inset: 0; background-color: rgba(26,20,16,0); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1.5rem; pointer-events: none; transition: background-color 0.3s var(--ease-out); }
@@ -528,7 +538,6 @@
                 </div>
                 <div class="contact-grid">
                     <div class="form-panel active" id="form-particulier"><form class="form reveal" id="contactFormParticulier" action="https://formspree.io/f/mpqjqllb" method="POST">
-                        <input type="hidden" name="_next" value="https://woodiram.com">
                         <input type="hidden" name="_subject" value="Nouveau projet — Particulier">
                         <div class="form-row">
                             <div class="form-group"><label>Prénom <span class="required">*</span></label><input type="text" required placeholder="Votre prénom" name="prenom"></div>
@@ -544,7 +553,6 @@
                         <button type="submit" class="form-submit">Envoyer mon projet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
                     </form></div>
                     <div class="form-panel" id="form-professionnel"><form class="form reveal" id="contactFormPro" action="https://formspree.io/f/xkovozve" method="POST">
-                        <input type="hidden" name="_next" value="https://woodiram.com">
                         <input type="hidden" name="_subject" value="Nouveau projet — Professionnel">
                         <div class="form-row">
                             <div class="form-group"><label>Nom <span class="required">*</span></label><input type="text" required placeholder="Votre nom" name="nom"></div>
@@ -740,6 +748,45 @@
         const uz = document.getElementById('uploadZone');
         const fi = document.getElementById('fileInput');
         if (uz && fi) { uz.addEventListener('click', () => fi.click()); uz.addEventListener('dragover', e => { e.preventDefault(); uz.style.borderColor = 'var(--primary)'; }); uz.addEventListener('dragleave', () => uz.style.borderColor = 'var(--border)'); }
+
+        // ========== FORM SUBMISSION ==========
+        document.querySelectorAll('#contactFormParticulier, #contactFormPro').forEach(form => {
+            form.addEventListener('submit', async e => {
+                e.preventDefault();
+                const btn = form.querySelector('.form-submit');
+                const origHTML = btn.innerHTML;
+                btn.innerHTML = 'Envoi en cours...';
+                btn.disabled = true;
+                btn.style.opacity = '0.7';
+                try {
+                    const res = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (res.ok) {
+                        form.innerHTML = `<div class="form-feedback">
+                            <div class="form-feedback__icon form-feedback__icon--success"><svg viewBox="0 0 32 32"><path d="M8 16l6 6 10-12"/></svg></div>
+                            <h3 class="form-feedback__title">Message envoy\u00e9</h3>
+                            <p class="form-feedback__text">Merci ! Votre message a bien \u00e9t\u00e9 envoy\u00e9. Nous vous r\u00e9pondons sous 48h.</p>
+                        </div>`;
+                    } else {
+                        throw new Error('Erreur serveur');
+                    }
+                } catch (err) {
+                    btn.innerHTML = origHTML;
+                    btn.disabled = false;
+                    btn.style.opacity = '';
+                    const existing = form.querySelector('.form-feedback--error');
+                    if (existing) existing.remove();
+                    const msg = document.createElement('div');
+                    msg.className = 'form-feedback--error';
+                    msg.style.cssText = 'color:var(--error);font-size:0.9375rem;margin-bottom:1rem;padding:1rem;background:rgba(158,74,74,0.08);border-radius:4px;border-left:3px solid var(--error);';
+                    msg.innerHTML = 'Une erreur est survenue. Veuillez r\u00e9essayer ou nous \u00e9crire \u00e0 <a href="mailto:contact@woodiram.com" style="color:var(--primary);text-decoration:underline;">contact@woodiram.com</a>';
+                    btn.parentNode.insertBefore(msg, btn);
+                }
+            });
+        });
 
     </script>
 </body>
