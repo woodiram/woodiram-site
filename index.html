@@ -7,7 +7,7 @@
     <meta name="description" content="Pièces uniques en bois massif, créées par des artisans thaïlandais. Tables, consoles et buffets sur mesure, livrés en France et en Europe.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
            VARIABLES — MODIFIER LES COULEURS ICI
@@ -39,8 +39,8 @@
             --success: #6d7d5e;
             --error: #9e4a4a;
 
-            --font-display: 'Cormorant Garamond', Georgia, serif;
-            --font-body: 'DM Sans', -apple-system, sans-serif;
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body: 'Outfit', -apple-system, sans-serif;
             --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
             --dur-short: 250ms;
@@ -79,9 +79,9 @@
         .header.scrolled { background-color: rgba(250,248,245,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--border); padding: 0.75rem 0; }
         .header__inner { display: flex; align-items: center; justify-content: space-between; }
         .header__logo { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; z-index: 1001; }
-        .header__logo-icon { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--brown-5) 0%, var(--brown-4) 100%); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--primary); transition: transform var(--dur-short); }
+        .header__logo-icon { width: 44px; height: 44px; border-radius: 50%; background: none; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--primary); transition: transform var(--dur-short); }
         .header__logo:hover .header__logo-icon { transform: scale(1.05); }
-        .header__logo-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--primary); letter-spacing: 0.08em; }
+        .header__logo-text { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--primary); letter-spacing: 0.08em; }
         .header__nav { display: none; gap: 2.25rem; align-items: center; }
         @media (min-width: 900px) { .header__nav { display: flex; } }
         .header__nav a { font-size: 0.9375rem; font-weight: 500; color: var(--text-primary); position: relative; padding: 0.25rem 0; cursor: pointer; transition: color var(--dur-short); }
@@ -327,10 +327,9 @@
         .modal__close:hover { background-color: var(--bg-secondary); }
         .modal__close svg { width: 24px; height: 24px; stroke: var(--text-primary); stroke-width: 2; }
         .modal__carousel { position: relative; background: var(--placeholder); margin: 0 1.25rem; border-radius: 4px; overflow: hidden; }
-        .modal__carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); will-change: transform; }
-        .modal__carousel-slide { flex: 0 0 85%; aspect-ratio: 16/10; position: relative; margin-right: 2%; }
-        .modal__carousel-slide:last-child { margin-right: 0; }
-        .modal__carousel.single-image .modal__carousel-slide { flex: 0 0 100%; margin-right: 0; }
+        .modal__carousel-track { position: relative; aspect-ratio: 16/10; }
+        .modal__carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease; }
+        .modal__carousel-slide.active { opacity: 1; }
         .modal__carousel-slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; display: block; }
         .modal__carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(250,248,245,0.9); display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; z-index: 2; transition: all var(--dur-short); opacity: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
         .modal__carousel:hover .modal__carousel-btn { opacity: 1; }
@@ -341,7 +340,6 @@
         .modal__carousel-dots { display: flex; gap: 0.5rem; justify-content: center; padding: 1rem 0 0.5rem; }
         .modal__carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; transition: all var(--dur-short); }
         .modal__carousel-dot.active { background: var(--primary); transform: scale(1.25); }
-        @media (max-width: 768px) { .modal__carousel-slide { flex: 0 0 92%; margin-right: 3%; } }
         .modal__content { padding: 1.25rem; }
         .modal__title { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 0.5rem; }
         .modal__story { color: var(--text-secondary); font-style: italic; margin-bottom: 1.5rem; font-size: 0.9375rem; }
@@ -377,7 +375,7 @@
 <body>
     <!-- HEADER -->
     <header class="header" id="header"><div class="container"><div class="header__inner">
-        <div class="header__logo" data-page="home"><div class="header__logo-icon"><img src="assets/logos/Logo_Avatar_200x200.png" alt="Woodiram" style="width:100%;height:100%;object-fit:contain;border-radius:50%;"></div><span class="header__logo-text">WOODIRAM</span></div>
+        <div class="header__logo" data-page="home"><div class="header__logo-icon"><img src="assets/logos/Logo_Avatar_200x200_Transparent_Full.png" alt="Woodiram" style="width:100%;height:100%;object-fit:contain;border-radius:50%;"></div><span class="header__logo-text">WOODIRAM</span></div>
         <nav class="header__nav"><a data-page="realisations">Réalisations</a><a data-page="savoir-faire">Savoir-faire</a><a data-page="notre-approche">Notre Approche</a><a data-page="a-propos">À Propos</a></nav>
         <div class="header__cta" data-page="votre-projet">Votre Projet</div>
         <button class="header__menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -674,14 +672,12 @@
                 modalCarousel.innerHTML = '<div style="aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:0.875rem;">Photo à venir</div>';
                 return;
             }
-            const isSingle = images.length === 1;
-            modalCarousel.classList.toggle('single-image', isSingle);
             html += '<div class="modal__carousel-track">';
             images.forEach((src, i) => {
-                html += `<div class="modal__carousel-slide"><img src="${src}" alt="Photo ${i + 1}"></div>`;
+                html += `<div class="modal__carousel-slide${i === 0 ? ' active' : ''}"><img src="${src}" alt="Photo ${i + 1}"></div>`;
             });
             html += '</div>';
-            if (!isSingle) {
+            if (images.length > 1) {
                 html += `<button class="modal__carousel-btn modal__carousel-btn--prev" onclick="carouselNav(-1)"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>`;
                 html += `<button class="modal__carousel-btn modal__carousel-btn--next" onclick="carouselNav(1)"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>`;
                 html += `<div class="modal__carousel-dots">`;
@@ -698,7 +694,6 @@
                     if (Math.abs(diff) > 50) { diff > 0 ? carouselNav(1) : carouselNav(-1); }
                 }, {passive: true});
             }
-            updateCarouselPosition();
         }
 
         function carouselNav(dir) {
@@ -709,16 +704,8 @@
 
         function carouselGoTo(idx) {
             carouselIndex = idx;
+            modalCarousel.querySelectorAll('.modal__carousel-slide').forEach((slide, i) => slide.classList.toggle('active', i === idx));
             modalCarousel.querySelectorAll('.modal__carousel-dot').forEach((dot, i) => dot.classList.toggle('active', i === idx));
-            updateCarouselPosition();
-        }
-
-        function updateCarouselPosition() {
-            const track = modalCarousel.querySelector('.modal__carousel-track');
-            if (!track) return;
-            const isSingle = modalCarousel.classList.contains('single-image');
-            const slideWidth = isSingle ? 100 : 87;
-            track.style.transform = `translateX(-${carouselIndex * slideWidth}%)`;
         }
 
         function openModal(item) {
