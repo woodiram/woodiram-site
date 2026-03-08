@@ -147,7 +147,7 @@
         .realisations__header { text-align: center; margin-bottom: 3rem; }
         .realisations__header p { max-width: 600px; margin: 1rem auto 0; color: var(--text-secondary); font-style: italic; }
         .realisations__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        @media (min-width: 600px) { .realisations__grid { grid-template-columns: repeat(4, 1fr); gap: 1.25rem; } }
+        @media (min-width: 600px) { .realisations__grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
         .realisation-card { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 4px; cursor: pointer; background: var(--placeholder); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.75rem; transition: transform var(--dur-short); }
         .realisation-card:hover { transform: scale(1.02); }
         .realisation-card__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,0.7) 0%, transparent 50%); opacity: 0; transition: opacity var(--dur-short); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem; }
@@ -206,7 +206,6 @@
         /* GALLERY */
         .gallery__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         @media (min-width: 600px) { .gallery__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
-        @media (min-width: 900px) { .gallery__grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
         .gallery-item { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 4px; cursor: pointer; background: var(--placeholder); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.05em; transition: transform var(--dur-short); }
         .gallery-item:hover { transform: scale(1.02); }
         .gallery-item__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,0.7) 0%, transparent 50%); opacity: 0; transition: opacity var(--dur-short); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; }
@@ -354,7 +353,6 @@
         .modal__title { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 0.5rem; }
         .modal__story { color: var(--text-secondary); font-style: italic; margin-bottom: 1.5rem; font-size: 0.9375rem; }
         .modal__specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; padding: 1rem; background-color: var(--bg-secondary); border-radius: 4px; margin-bottom: 1.5rem; }
-        @media (min-width: 600px) { .modal__specs { grid-template-columns: repeat(6, 1fr); } }
         .modal__spec { text-align: center; }
         .modal__spec-icon { width: 28px; height: 28px; margin: 0 auto 0.375rem; stroke: var(--primary); stroke-width: 1.5; fill: none; }
         .modal__spec-value { font-weight: 600; font-size: 0.8125rem; margin-bottom: 0.125rem; }
@@ -428,10 +426,12 @@
             <section class="section section--alt"><div class="container">
                 <div class="realisations__header reveal"><h2>Ce qui a été créé</h2><p>Chaque pièce présentée ici a trouvé sa maison. La prochaine pourrait être la vôtre.</p></div>
                 <div class="realisations__grid">
-                    <div class="realisation-card reveal reveal-delay-1" data-page="realisations"><img src="assets/images/Test_table%20a%20manger.png" alt="Table a manger en bois massif Suar" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">L'Horizon</h3><span class="realisation-card__essence">Suar</span></div></div></div>
-                    <div class="realisation-card reveal reveal-delay-2" data-page="realisations"><img src="assets/images/Test_buffet.png" alt="Buffet en bois massif Acacia" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">Racine d'Ombre</h3><span class="realisation-card__essence">Acacia</span></div></div></div>
-                    <div class="realisation-card reveal reveal-delay-3" data-page="realisations"><img src="assets/images/Test_table%20basse.png" alt="Table basse en bois massif Teak" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">Écorce Vivante</h3><span class="realisation-card__essence">Teak</span></div></div></div>
-                    <div class="realisation-card reveal reveal-delay-4" data-page="realisations"><img src="assets/images/Test_console.png" alt="Console en bois massif Padouk" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">La Traversée</h3><span class="realisation-card__essence">Padouk</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-1" data-page="realisations"><img src="assets/images/Assets_Realisation_001_A.avif" alt="Pièce en bois massif Rain tree, réalisation unique Woodiram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" width="1200" height="900" loading="lazy" decoding="async"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">L'Horizon</h3><span class="realisation-card__essence">Rain tree</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-2" data-page="realisations"><img src="assets/images/Assets_Realisation_002_A.avif" alt="Pièce en bois massif Acacia, réalisation unique Woodiram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" width="1200" height="900" loading="lazy" decoding="async"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">Racine d'Ombre</h3><span class="realisation-card__essence">Acacia</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-3" data-page="realisations"><img src="assets/images/Assets_Realisation_003_A.avif" alt="Pièce en bois massif Suar, réalisation unique Woodiram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" width="1200" height="900" loading="lazy" decoding="async"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">Écorce Vivante</h3><span class="realisation-card__essence">Suar</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-1" data-page="realisations"><img src="assets/images/Assets_Realisation_004_A.avif" alt="Pièce en bois massif Suar, réalisation unique Woodiram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" width="1200" height="900" loading="lazy" decoding="async"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">La Traversée</h3><span class="realisation-card__essence">Suar</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-2" data-page="realisations"><img src="assets/images/Assets_Realisation_005_A.avif" alt="Pièce en bois massif Teck, réalisation unique Woodiram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" width="1200" height="900" loading="lazy" decoding="async"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">Silence</h3><span class="realisation-card__essence">Teck</span></div></div></div>
+                    <div class="realisation-card reveal reveal-delay-3" data-page="realisations"><img src="assets/images/Assets_Realisation_006_A.avif" alt="Pièce en bois massif Teck, réalisation unique Woodiram" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" width="1200" height="900" loading="lazy" decoding="async"><div class="realisation-card__overlay"><div class="realisation-card__info"><h3 class="realisation-card__name">L'Ancre</h3><span class="realisation-card__essence">Teck</span></div></div></div>
                 </div>
                 <div class="realisations__cta reveal"><div class="btn btn--ghost" data-page="realisations">Voir toutes les réalisations <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
             </div></section>
@@ -584,14 +584,7 @@
         <div class="modal__content">
             <h2 class="modal__title" id="modalTitle">Nom</h2>
             <p class="modal__story" id="modalStory">Description</p>
-            <div class="modal__specs">
-                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14"/><circle cx="16" cy="16" r="6" stroke-dasharray="3 3"/></svg><div class="modal__spec-value" id="modalEssence">Suar</div><div class="modal__spec-label">Essence</div></div>
-                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M4 28h24M8 28V12h4v16M14 28V8h4v20M20 28V16h4v12"/></svg><div class="modal__spec-value" id="modalDims">280×95</div><div class="modal__spec-label">Dimensions</div></div>
-                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="12" rx="2"/><path d="M10 14V10a6 6 0 1 1 12 0v4"/></svg><div class="modal__spec-value" id="modalFeet">Bois</div><div class="modal__spec-label">Piètement</div></div>
-                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10"/><path d="M16 10v6l4 2"/></svg><div class="modal__spec-value" id="modalAge">~150 ans</div><div class="modal__spec-label">Âge</div></div>
-                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M16 4v24M8 12l8-8 8 8M8 20l8 8 8-8"/></svg><div class="modal__spec-value" id="modalWeight">~85 kg</div><div class="modal__spec-label">Poids</div></div>
-                <div class="modal__spec"><svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M6 26c0-10 5-15 10-20M26 26c0-10-5-15-10-20"/></svg><div class="modal__spec-value">Live edge</div><div class="modal__spec-label">Bord</div></div>
-            </div>
+            <div class="modal__specs" id="modalSpecs"></div>
             <div class="modal__cta" data-page="votre-projet">Imaginez la vôtre <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         </div>
     </div></div>
@@ -641,22 +634,19 @@
 
         // ========== GALLERY ==========
         const galleryData = [
-            { name: "L'Horizon", essence: "Suar", dims: "280 × 95 cm", weight: "~85 kg", age: "~150 ans", feet: "Bois massif", type: "Table", images: ["assets/images/Assets_Realisation_001_A.avif", "assets/images/Assets_Realisation_001_B.avif"] },
-            { name: "Racine d'Ombre", essence: "Acacia", dims: "180 × 85 cm", weight: "~60 kg", age: "~120 ans", feet: "Métal noir", type: "Console", images: ["assets/images/Assets_Realisation_002_A.avif", "assets/images/Assets_Realisation_002_B.avif"] },
-            { name: "Écorce Vivante", essence: "Teak", dims: "120 × 80 cm", weight: "~45 kg", age: "~100 ans", feet: "Bois massif", type: "Table basse", images: ["assets/images/Assets_Realisation_003_A.avif", "assets/images/Assets_Realisation_003_B.avif"] },
-            { name: "La Traversée", essence: "Padouk", dims: "220 × 50 cm", weight: "~55 kg", age: "~130 ans", feet: "Métal bronze", type: "Buffet", images: ["assets/images/Assets_Realisation_004_A.avif"] },
-            { name: "Silence", essence: "Suar", dims: "320 × 110 cm", weight: "~110 kg", age: "~200 ans", feet: "Bois massif", type: "Table XL", images: ["assets/images/Assets_Realisation_005_A.avif", "assets/images/Assets_Realisation_005_B.avif"] },
-            { name: "L'Ancre", essence: "Acacia", dims: "160 × 45 cm", weight: "~35 kg", age: "~80 ans", feet: "Métal noir", type: "Console", images: ["assets/images/Assets_Realisation_006_A.avif"] },
-            { name: "Murmure", essence: "Teak", dims: "250 × 90 cm", weight: "~75 kg", age: "~140 ans", feet: "Bois massif", type: "Table", images: ["assets/images/Assets_Realisation_007_A.avif"] },
-            { name: "Souffle", essence: "Suar", dims: "140 × 70 cm", weight: "~40 kg", age: "~90 ans", feet: "Bois massif", type: "Table basse", images: ["assets/images/Assets_Realisation_008_A.avif", "assets/images/Assets_Realisation_008_B.avif"] },
-            { name: "Crépuscule", essence: "Acacia", dims: "300 × 100 cm", weight: "~95 kg", age: "~180 ans", feet: "Métal bronze", type: "Table XL", images: ["assets/images/Assets_Realisation_009_A.avif", "assets/images/Assets_Realisation_009_B.avif"] },
-            { name: "Le Passage", essence: "Teak", dims: "180 × 40 cm", weight: "~30 kg", age: "~110 ans", feet: "Bois massif", type: "Banc", images: ["assets/images/Assets_Realisation_010_A.avif", "assets/images/Assets_Realisation_010_B.avif"] },
-            { name: "Aurore", essence: "Suar", dims: "260 × 95 cm", weight: "~80 kg", age: "~160 ans", feet: "Métal noir", type: "Table", images: [] },
-            { name: "Refuge", essence: "Padouk", dims: "200 × 55 cm", weight: "~50 kg", age: "~120 ans", feet: "Bois massif", type: "Console", images: [] }
+            { name: "L'Horizon", essence: "Rain tree", age: "50 ans", dims: "90 cm", images: ["assets/images/Assets_Realisation_001_A.avif", "assets/images/Assets_Realisation_001_B.avif", "assets/images/Assets_Realisation_001_C.avif"] },
+            { name: "Racine d'Ombre", essence: "Acacia", age: "150 ans", dims: "4,2 m", images: ["assets/images/Assets_Realisation_002_A.avif", "assets/images/Assets_Realisation_002_B.avif", "assets/images/Assets_Realisation_002_C.avif"] },
+            { name: "Écorce Vivante", essence: "Suar", age: "40 ans", dims: "2,8 m", images: ["assets/images/Assets_Realisation_003_A.avif", "assets/images/Assets_Realisation_003_B.avif", "assets/images/Assets_Realisation_003_C.avif"] },
+            { name: "La Traversée", essence: "Suar", age: "40 ans", dims: "4 m", images: ["assets/images/Assets_Realisation_004_A.avif", "assets/images/Assets_Realisation_004_B.avif", "assets/images/Assets_Realisation_004_C.avif"] },
+            { name: "Silence", essence: "Teck", age: "25 ans", dims: "1,8 m", images: ["assets/images/Assets_Realisation_005_A.avif", "assets/images/Assets_Realisation_005_B.avif", "assets/images/Assets_Realisation_005_C.avif"] },
+            { name: "L'Ancre", essence: "Teck", age: "35 ans", dims: "2 m", images: ["assets/images/Assets_Realisation_006_A.avif", "assets/images/Assets_Realisation_006_B.avif", "assets/images/Assets_Realisation_006_C.avif"] },
+            { name: "Murmure", essence: "Suar", age: "25 ans", dims: "53 cm", images: ["assets/images/Assets_Realisation_007_A.avif", "assets/images/Assets_Realisation_007_B.avif"] },
+            { name: "Souffle", essence: "Suar", age: "40 ans", dims: "2,4 m", images: ["assets/images/Assets_Realisation_008_A.avif", "assets/images/Assets_Realisation_008_B.avif", "assets/images/Assets_Realisation_008_C.avif"] },
+            { name: "Crépuscule", essence: "Acacia", age: "30 ans", dims: "2,6 m", images: ["assets/images/Assets_Realisation_009_A.avif", "assets/images/Assets_Realisation_009_B.avif", "assets/images/Assets_Realisation_009_C.avif", "assets/images/Assets_Realisation_009_D.avif"] }
         ];
         const grid = document.getElementById('galleryGrid');
         if (grid) { galleryData.forEach((item, i) => {
-            const c = document.createElement('div'); c.className = 'gallery-item reveal'; c.style.transitionDelay = `${(i%4)*50}ms`;
+            const c = document.createElement('div'); c.className = 'gallery-item reveal'; c.style.transitionDelay = `${(i%3)*50}ms`;
             const imgHtml = item.images.length > 0
                 ? `<img src="${item.images[0]}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">`
                 : item.type;
@@ -716,15 +706,27 @@
             modalCarousel.querySelectorAll('.modal__carousel-dot').forEach((dot, i) => dot.classList.toggle('active', i === idx));
         }
 
+        const specIcons = {
+            essence: '<svg class="modal__spec-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14"/><circle cx="16" cy="16" r="6" stroke-dasharray="3 3"/></svg>',
+            dims: '<svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M4 28h24M8 28V12h4v16M14 28V8h4v20M20 28V16h4v12"/></svg>',
+            age: '<svg class="modal__spec-icon" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10"/><path d="M16 10v6l4 2"/></svg>',
+            feet: '<svg class="modal__spec-icon" viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="12" rx="2"/><path d="M10 14V10a6 6 0 1 1 12 0v4"/></svg>',
+            weight: '<svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M16 4v24M8 12l8-8 8 8M8 20l8 8 8-8"/></svg>',
+            bord: '<svg class="modal__spec-icon" viewBox="0 0 32 32"><path d="M6 26c0-10 5-15 10-20M26 26c0-10-5-15-10-20"/></svg>'
+        };
+        const specLabels = { essence: 'Essence', dims: 'Dimension', age: 'Âge', feet: 'Piètement', weight: 'Poids', bord: 'Bord' };
+
         function openModal(item) {
             document.getElementById('modalTitle').textContent = item.name;
-            document.getElementById('modalEssence').textContent = item.essence;
-            document.getElementById('modalDims').textContent = item.dims;
-            document.getElementById('modalWeight').textContent = item.weight;
-            document.getElementById('modalAge').textContent = item.age;
-            document.getElementById('modalFeet').textContent = item.feet;
-            const stories = [`Taillée dans un ${item.essence} centenaire, cette pièce a rejoint un intérieur contemporain.`, `Les veines naturelles du bois racontent des décennies de croissance paisible.`, `Une pièce maîtresse, conçue pour traverser les générations.`];
+            const stories = [`Taillée dans un ${item.essence} d'exception, cette pièce a rejoint un intérieur contemporain.`, `Les veines naturelles du bois racontent des décennies de croissance paisible.`, `Une pièce maîtresse, conçue pour traverser les générations.`];
             document.getElementById('modalStory').textContent = stories[Math.floor(Math.random()*stories.length)];
+            const specsEl = document.getElementById('modalSpecs');
+            const specKeys = ['essence', 'dims', 'age', 'feet', 'weight', 'bord'];
+            const specsHtml = specKeys.filter(k => item[k]).map(k =>
+                `<div class="modal__spec">${specIcons[k]}<div class="modal__spec-value">${item[k]}</div><div class="modal__spec-label">${specLabels[k]}</div></div>`
+            ).join('');
+            specsEl.innerHTML = specsHtml;
+            specsEl.style.gridTemplateColumns = `repeat(${specKeys.filter(k => item[k]).length}, 1fr)`;
             buildCarousel(item.images);
             modal.classList.add('active'); document.body.classList.add('no-scroll');
         }
