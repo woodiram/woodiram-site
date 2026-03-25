@@ -171,18 +171,18 @@
 
         /* PROCESS STEPS HOME */
         .process__header { text-align: center; margin-bottom: 3.5rem; }
-        .process__steps { display: flex; flex-direction: column; gap: 3rem; position: relative; padding-left: 40px; }
+        .process__steps { display: flex; flex-direction: column; gap: 3rem; position: relative; padding-left: 0; }
         .step { display: flex; align-items: flex-start; gap: 1.5rem; text-align: left; position: relative; }
-        .step__icon { flex-shrink: 0; position: relative; z-index: 2; }
+        .step__icon { flex-shrink: 0; position: relative; z-index: 2; margin-top: 1.8rem; }
         .step__icon img { width: 224px; height: 224px; object-fit: contain; border-radius: 6px; }
-        @media (max-width: 899px) { .step__icon img { width: 120px; height: 120px; } }
+        @media (max-width: 999px) { .step__icon img { width: 120px; height: 120px; } }
         .step__text { padding-top: 0.5rem; }
         .step__title { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 0.5rem; }
         .step__desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
         .process__cta { text-align: center; margin-top: 3rem; }
         /* Ligne verticale mobile */
         .process__steps::before {
-            content: ''; position: absolute; left: 151px; top: 112px; bottom: 112px;
+            content: ''; position: absolute; left: 60px; top: 60px; bottom: 60px;
             width: 1px; background-color: rgba(83, 71, 55, 0.5);
         }
         /* Desktop : horizontal */
@@ -190,6 +190,7 @@
             .process__steps { flex-direction: row; gap: 0; padding-left: 0; justify-content: space-between; align-items: flex-start; }
             .process__steps::before { left: 10%; right: 10%; top: 112px; bottom: auto; width: auto; height: 1px; background-color: rgba(83, 71, 55, 0.5); }
             .step { flex-direction: column; align-items: center; text-align: center; flex: 1; gap: 1rem; }
+            .step__icon { margin-top: 0; }
         }
 
         /* CTA FINAL */
